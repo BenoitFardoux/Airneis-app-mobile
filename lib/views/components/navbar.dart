@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './../../../colors/colors.dart';
 import 'package:flutter_second/views/components/auth/login.dart';
 // import 'package:flutter_second/views/components/cards/add_card_payment.dart';
 // import 'package:provider/provider.dart';
@@ -21,10 +22,12 @@ class NavBar_Icons_Title extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Color(0xFFBA58268),
+    return 
+    
+    AppBar(
+      backgroundColor: ColorsApp.secondaryColor,
       title:
-          Text(nameOfApplication, style: TextStyle(color: Color(0xFFBE6C077))),
+          Text(nameOfApplication, style: TextStyle(color: ColorsApp.primaryColor)),
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.search),

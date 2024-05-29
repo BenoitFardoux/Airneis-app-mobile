@@ -15,9 +15,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String appTitle = 'Test';
+    const String appTitle = 'Airneis';
     return 
-    
+   
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ItemCardController()),
@@ -31,6 +31,13 @@ class MainApp extends StatelessWidget {
     
     MaterialApp(
       title: appTitle,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        primaryColor: Color(0xFFE6C077),
+
+
+
+      ),
       home: Scaffold(
         appBar: NavBar_Icons_Title(nameOfApplication: appTitle),
         drawer: 

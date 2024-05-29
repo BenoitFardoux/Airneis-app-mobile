@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_second/controllers/item_card_controller.dart';
+import 'package:flutter_second/controllers/produit_controller.dart';
+import 'package:flutter_second/provider/auth_provider.dart';
+import 'package:flutter_second/provider/panier_provider.dart';
+import 'package:provider/provider.dart';
 import 'components/navbar.dart';
 import 'components/carousel.dart';
 import 'components/categorie.dart';
 import 'components/produit.dart';
+
 
 class MainApp extends StatelessWidget {
   MainApp({Key? key}) : super(key: key);
@@ -10,11 +16,27 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const String appTitle = 'Test';
-    return MaterialApp(
+    return 
+    
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ItemCardController()),
+         ChangeNotifierProvider(create: (_) => AuthProvider()),
+         ChangeNotifierProvider(create: (context) => panierProvider()), 
+        //  ChangeNotifierProvider(create: (context) => ProduitControllerTest()),
+      ],
+      child:
+    Container(
+      child:
+    
+    MaterialApp(
       title: appTitle,
       home: Scaffold(
         appBar: NavBar_Icons_Title(nameOfApplication: appTitle),
-        drawer: NavBar_Drawer(),
+        drawer: 
+        
+        
+        NavBar_Drawer(),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,6 +69,8 @@ class MainApp extends StatelessWidget {
           ),
         ),
       ),
+    ),
+    ),
     );
   }
 }

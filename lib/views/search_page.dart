@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_second/views/components/produit.dart';
 import 'package:provider/provider.dart';
-import '../controllers/search_controller.dart' as sc; // Utiliser un alias
+import '../controllers/search_controller.dart' as sc; 
+import './components/produit_detail.dart';// Utiliser un alias
 
 class SearchPage extends StatelessWidget {
     const SearchPage({super.key});
@@ -30,11 +32,19 @@ class SearchPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: controller.filteredArticles.length,
+                    itemCount: controller.filteredArticles.length,                    
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(controller.filteredArticles[index].title),
+                        title: Text(controller.filteredArticles[index].titre),
                         subtitle: Text(controller.filteredArticles[index].description),
+                         onTap: () {
+                          Navigator.push(
+                            context,
+                            // MaterialPageRoute(builder: (context) => ProductDetailsPage(article: controller.filteredArticles[index])),
+                            // MaterialPageRoute(builder: (context) => ProductDetailsPage(article: controller.filteredArticles[index])),
+                            MaterialPageRoute(builder: (context) => ProduitDetail()),
+                          );
+                        },
                       );
                     },
                   ),

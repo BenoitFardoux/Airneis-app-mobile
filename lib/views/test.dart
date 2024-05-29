@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../controllers/item_card_controller.dart'; // Assurez-vous que ce fichier existe et contient la classe ItemCardController
+import '../controllers/item_card_controller.dart'; 
+import './../models/card_item.dart';// Assurez-vous que ce fichier existe et contient la classe ItemCardController
 
 class Test extends StatelessWidget {
   const Test({super.key}); // Utilisation de const
@@ -33,7 +34,7 @@ class CartPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => cart.addItem(), // Ajoute un nouvel article
+        onPressed: () => cart.addItem(CardItem(numero: 666, nom: 'test dans le notify', Month: "11/02", Year: "2020", isFavorite: false)), // Ajoute un nouvel article
         child: Icon(Icons.add),
       ),
     );

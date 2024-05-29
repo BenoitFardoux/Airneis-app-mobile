@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../views/add_card_payment.dart';
+import 'add_card_payment.dart';
 
 class AddCardList extends StatelessWidget {
   const AddCardList({super.key});

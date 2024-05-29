@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../add_card_payment.dart'; // Correction du chemin d'importation
+import 'cards/add_card_payment.dart'; // Correction du chemin d'importation
 
 class Produit extends StatelessWidget {
   const Produit({super.key});
@@ -12,10 +12,10 @@ class Produit extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AddCardPayment()), // Ajout de const
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => AddCardPayment()), // Ajout de const
+              // );
             },
             child: Image.network(
                 'https://m.media-amazon.com/images/M/MV5BZDEyN2NhMjgtMjdhNi00MmNlLWE5YTgtZGE4MzNjMTRlMGEwXkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_SX300.jpg',

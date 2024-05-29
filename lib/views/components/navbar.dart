@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
-import '../manage_cards.dart'; // Import correct de ManageCards
-import '../test.dart'; // Import correct de test
+import 'package:flutter_second/views/components/auth/login.dart';
+// import 'package:flutter_second/views/components/cards/add_card_payment.dart';
+// import 'package:provider/provider.dart';
+// import './../components/auth/register_screen.dart'; 
+import 'package:flutter_second/views/components/auth/login_screen.dart';
+import 'cards/manage_cards.dart'; // Import correct de ManageCards
+import 'panier/panier_manage.dart'; // Import correct de ManageCards
+// import '../test.dart'; // Import correct de test
 import '../search_page.dart'; // Import correct de CardItem
+import '../search_page_filter.dart'; // Import correct de CardItem
 
-class NavBar_Icons_Title extends StatelessWidget implements PreferredSizeWidget {
+class NavBar_Icons_Title extends StatelessWidget
+    implements PreferredSizeWidget {
   const NavBar_Icons_Title({
     super.key,
     required this.nameOfApplication,
@@ -15,7 +23,8 @@ class NavBar_Icons_Title extends StatelessWidget implements PreferredSizeWidget 
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Color(0xFFBA58268),
-      title: Text(nameOfApplication, style: TextStyle(color: Color(0xFFBE6C077))),
+      title:
+          Text(nameOfApplication, style: TextStyle(color: Color(0xFFBE6C077))),
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.search),
@@ -26,6 +35,26 @@ class NavBar_Icons_Title extends StatelessWidget implements PreferredSizeWidget 
             );
           },
         ),
+       
+        if (true) // Afficher l'icône d'inscription si non connecté
+          // Afficher l'icône de profil si connecté
+          IconButton(
+            icon: Icon(Icons.person_outline),
+            onPressed: () {
+              // Navigator.pushNamed(context, '/profile');
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginScreen()),
+            );
+            },
+          )
+        else
+          IconButton(
+            icon: Icon(Icons.person),
+            onPressed: () {
+              // Navigator.pushNamed(context, '/users');
+            },
+          ),
         IconButton(
           icon: Icon(Icons.shopping_cart),
           onPressed: () {
@@ -53,32 +82,44 @@ class NavBar_Drawer extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ManageCards()), // Ajout de const
+                MaterialPageRoute(
+                    builder: (context) => ManageCardsLess()), // Ajout de const
               );
             },
           ),
-          ListTile(
-            title: const Text('list et stateful'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Test()), // Correction du nom de la classe et ajout de const
-              );
-            },
-          ),
+         
+         
           ListTile(
             title: const Text('rechercher un article par mot clé'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SearchPage()), // Ajout de const
+                MaterialPageRoute(
+                    builder: (context) => const SearchPage()), // Ajout de const
               );
             },
           ),
           ListTile(
-            title: const Text('item 2'),
-            onTap: () {},
+            title: const Text('panier'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PanierManage()), // Ajout de const
+              );
+            },
           ),
+          ListTile(
+            title: const Text('new panier with filters'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SearchPageFilter()), // Ajout de const
+              );
+            },
+          ),
+          
         ],
       ),
     );

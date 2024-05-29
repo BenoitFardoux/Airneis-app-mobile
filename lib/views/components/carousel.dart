@@ -5,9 +5,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class MyCarouselWidget extends StatelessWidget {
   final List<String> imageUrls = [
-    'https://m.media-amazon.com/images/M/MV5BOGZhM2FhNTItODAzNi00YjA0LWEyN2UtNjJlYWQzYzU1MDg5L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
-    'https://m.media-amazon.com/images/M/MV5BZjRjOTFkOTktZWUzMi00YzMyLThkMmYtMjEwNmQyNzliYTNmXkEyXkFqcGdeQXVyNzQ1ODk3MTQ@._V1_SX300.jpg',
-    'https://m.media-amazon.com/images/M/MV5BZDEyN2NhMjgtMjdhNi00MmNlLWE5YTgtZGE4MzNjMTRlMGEwXkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_SX300.jpg',
+    'https://media.istockphoto.com/id/1312439845/fr/photo/int%C3%A9rieur-%C3%A9l%C3%A9gant-de-salle-de-salon-avec-de-belles-usines-de-maison.jpg?s=2048x2048&w=is&k=20&c=AVuJePyuQRPCPUt9B93IvkrU5i7-RkgwoNTpNOeMR8E=',
+    'https://media.istockphoto.com/id/1392982688/fr/photo/salon-scandinave-en-bois-gros-plan-dans-des-tons-blancs-maquette-de-cadre-avec-espace-de.jpg?s=2048x2048&w=is&k=20&c=6W95qF63aZSTl4ry6rBoq2cF1su5wU-KgMQubgRm3cw=',
+    'https://media.istockphoto.com/id/1191672500/fr/photo/int%C3%A9rieur-moderne-de-salon-scandinave-avec-le-sofa-%C3%A0-la-menthe-%C3%A9l%C3%A9gant-les-meubles-la-carte.jpg?s=2048x2048&w=is&k=20&c=EIF1UJCKfTiT9eE9Huj1nKHcAvi5SMEAJyJ5YP2GmIc=',
   ];
 
   @override

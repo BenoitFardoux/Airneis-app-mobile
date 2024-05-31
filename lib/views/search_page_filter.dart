@@ -56,7 +56,7 @@ class SearchPageFilter extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) => FilteredResultsPage(
                                         filteredArticles:
-                                            controller.filteredArticles)),
+                                            controller.filteredArticles, NomRecherche: controller.searchController.text.toLowerCase().toString())),
                               );
                             },
                             child: Text('Apply Filters'),

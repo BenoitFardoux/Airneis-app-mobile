@@ -7,6 +7,7 @@ import 'package:flutter_second/views/components/auth/login.dart';
 import 'package:flutter_second/views/components/auth/login_screen.dart';
 import 'cards/manage_cards.dart'; // Import correct de ManageCards
 import 'panier/panier_manage.dart'; // Import correct de ManageCards
+import 'adresse/manage_adresse.dart'; // Import correct de ManageCards
 // import '../test.dart'; // Import correct de test
 import '../search_page.dart'; // Import correct de CardItem
 import '../search_page_filter.dart'; // Import correct de CardItem
@@ -87,6 +88,17 @@ class NavBar_Drawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) => ManageCardsLess()), // Ajout de const
+              );
+            },
+          ),
+  
+          ListTile(
+            title: const Text('Gestion des adresses'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ManageAdress()), // Ajout de const
               );
             },
           ),

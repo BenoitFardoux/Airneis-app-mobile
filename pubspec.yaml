@@ -24,3 +24,14 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: NotoSans
+      fonts:
+        - asset: lib/assets/fonts/NotoSans-VariableFont_wdth,wght.ttf      
+    - family: NotoSansRegular
+      fonts:
+        - asset: lib/assets/fonts/NotoSans-Regular.ttf
+    - family: NotoSansLight
+      fonts:
+        - asset: lib/assets/fonts/NotoSans-Light.ttf
+          

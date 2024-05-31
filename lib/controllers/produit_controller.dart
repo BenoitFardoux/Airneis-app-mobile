@@ -21,7 +21,7 @@ class ProduitControllerTest extends ChangeNotifier {
     ),
     images: [
       ImageProduit(
-        url: "https://example.com/image1.jpg",
+        url: "https://media.istockphoto.com/id/1675290745/fr/photo/concept-zero-gravity-avec-canap%C3%A9-volant-plante-lampadaire-et-objets-dans-le-salon.jpg?s=2048x2048&w=is&k=20&c=05Cp907vzYzhv6dsYbLC3wuCiQVG_fda4U0SHOMi-84=",
         description: "Vue de face de la chaise moderne",
       )
     ],
@@ -42,7 +42,7 @@ class ProduitControllerTest extends ChangeNotifier {
 
   List get items => _produits;
 
-  void addItem(Produit produit) {
+  addItem(Produit produit) {
     _produits.add(produit);
     print( 'items => ${items}');
     print( 'produis => ${_produits}');
@@ -85,7 +85,7 @@ void createAndAddProduct() {
     ),
     images: [
       ImageProduit(
-        url: "https://example.com/image1.jpg",
+        url: "https://media.istockphoto.com/id/1675290745/fr/photo/concept-zero-gravity-avec-canap%C3%A9-volant-plante-lampadaire-et-objets-dans-le-salon.jpg?s=2048x2048&w=is&k=20&c=05Cp907vzYzhv6dsYbLC3wuCiQVG_fda4U0SHOMi-84=",
         description: "Vue de face de la chaise moderne",
       )
     ],

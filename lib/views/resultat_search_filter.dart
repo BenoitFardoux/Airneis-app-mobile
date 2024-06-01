@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_second/controllers/produit_controller.dart';
 import 'package:provider/provider.dart';
 // import 'package:flutter_second/controllers/produit_controller.dart';
-import 'package:flutter_second/provider/panier_provider.dart';
+
 import './../colors/colors.dart';
 // import '../models/produit.dart'; // Assurez-vous que le chemin d'import est correct
-import './components/produit_detail.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import './main_app.dart';
 

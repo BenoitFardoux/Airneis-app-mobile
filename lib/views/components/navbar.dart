@@ -11,6 +11,7 @@ import 'adresse/manage_adresse.dart'; // Import correct de ManageCards
 // import '../test.dart'; // Import correct de test
 import '../search_page.dart'; // Import correct de CardItem
 import '../search_page_filter.dart'; // Import correct de CardItem
+import './../components/checkout/checkout_widget.dart';
 
 class NavBar_Icons_Title extends StatelessWidget
     implements PreferredSizeWidget {
@@ -131,6 +132,16 @@ class NavBar_Drawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) => SearchPageFilter()), // Ajout de const
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Checkout'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CheckoutWidget()), // Ajout de const
               );
             },
           ),

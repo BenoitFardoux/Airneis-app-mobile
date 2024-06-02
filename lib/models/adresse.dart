@@ -14,7 +14,7 @@ class Adresse{
 
   factory Adresse.fromJson(Map<String, dynamic> json) {
     return Adresse(
-      id: json['id'],
+      id: json['id'] ?? 'par défaut',
       numeroDeRue: json['numeroDeRue'],
       informations: json['informations'],
       ville: json['ville'],

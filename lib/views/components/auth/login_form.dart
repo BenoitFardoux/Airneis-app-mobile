@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_second/views/components/auth/profile_screen.dart';
+// import 'package:flutter_second/views/components/auth/profile_screen.dart';
+import 'package:flutter_second/views/components/auth/profil_screen.dart';
 import 'package:provider/provider.dart';
 
 import './../../../api/user.dart';
@@ -58,7 +59,7 @@ class _LoginFormState extends State<LoginForm> {
       Future.delayed(Duration(seconds: 2), () {
         Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProfileScreen()),
+              MaterialPageRoute(builder: (context) => UserProductsScreen()),
             );
       });
     } catch (e) {

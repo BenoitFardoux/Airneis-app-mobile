@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import '../models/produit.dart';// Assurez-vous que ce fichier existe et contient la classe CardItem
 
 class ProduitControllerTest extends ChangeNotifier {
+
+  
   List _produits = [Produit(
     id: "1",
     nom: "Chaise Moderne",
@@ -31,47 +33,11 @@ class ProduitControllerTest extends ChangeNotifier {
         nom: "Bois",
       )
     ],
-  )];
-
-  // ProduitController() {
-  //   createAndAddProduct();
-  //   print(items);
-  //   notifyListeners();
-  //   // retrieveProduits();
-  // }
-
-  List get items => _produits;
-
-  addItem(Produit produit) {
-    _produits.add(produit);
-    print( 'items => ${items}');
-    print( 'produis => ${_produits}');
-    notifyListeners();
-  }
-
-  void removeItem(Produit produit) {
-    _produits.remove(produit);
-    notifyListeners();
-  }
-
-  retrieveProduits(){
-    return _produits.length;
-  }
-
-//   void retrieveProduits() async {   
-     
-//     // _produits = await getProduit();
-//     _produits = items; 
-//     print('dans le retrieve produit');
-//     print(_produits);
-//     notifyListeners(); 
-//   }
-
-// Exemple de création d'un produit
-void createAndAddProduct() {
-  Produit newProduit = Produit(
-    id: "1",
-    nom: "Chaise Moderne",
+  ),
+  
+  Produit(
+    id: "2",
+    nom: "Canapé",
     description: "Une chaise moderne confortable et élégante",
     prix: 120.0,
     dimension: Dimension(
@@ -95,13 +61,30 @@ void createAndAddProduct() {
         nom: "Bois",
       )
     ],
-  );
+  )
+  
+  
+  ];
 
-  // Supposons que vous avez une instance de ProduitController appelée produitCtrl
-//  addItem(newProduit);
-// addItem("test"); 
-notifyListeners();
-}
+  List get items => _produits;
+
+  addItem(Produit produit) {
+    _produits.add(produit);
+    print( 'items => ${items}');
+    print( 'produis => ${_produits}');
+    notifyListeners();
+  }
+
+  void removeItem(Produit produit) {
+    _produits.remove(produit);
+    notifyListeners();
+  }
+
+  retrieveProduits(){
+    return _produits.length;
+  }
+
+
 
 
 

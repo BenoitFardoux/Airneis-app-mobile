@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import './../../../colors/colors.dart';
-import 'package:flutter_second/views/components/auth/login.dart';
-// import 'package:flutter_second/views/components/cards/add_card_payment.dart';
-// import 'package:provider/provider.dart';
-// import './../components/auth/register_screen.dart'; 
+
 import 'package:flutter_second/views/components/auth/login_screen.dart';
 import 'cards/manage_cards.dart'; // Import correct de ManageCards
 import 'panier/panier_manage.dart'; // Import correct de ManageCards
 import 'adresse/manage_adresse.dart'; // Import correct de ManageCards
-// import '../test.dart'; // Import correct de test
 import '../search_page.dart'; // Import correct de CardItem
 import '../search_page_filter.dart'; // Import correct de CardItem
 import './../components/checkout/checkout_widget.dart';
+import './../components/categorie/categorie_widget.dart';
 
 class NavBar_Icons_Title extends StatelessWidget
     implements PreferredSizeWidget {
@@ -142,6 +139,16 @@ class NavBar_Drawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) => CheckoutWidget()), // Ajout de const
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Categorie'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PageCheckout()), // Ajout de const
               );
             },
           ),

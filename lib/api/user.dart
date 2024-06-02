@@ -2,10 +2,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import './../../utils/secure_storage.dart';
 import './../models/user_model.dart'; 
+import './../assets/ip/ip.dart';
 
 Future<int> registerUser(
     String firstName, String lastName, String email, String password) async {
-  var url = Uri.parse('http://127.0.0.1:8080/api/auth/register');
+  var url = Uri.parse('${IPConfig.getIP()}api/auth/register');
 
   var headers = {
     'Content-Type': 'application/json',
@@ -41,7 +42,10 @@ Future<int> registerUser(
 
 
 Future<http.Response> login(String email, String password) async {
-  final url = Uri.parse('http://localhost:8080/api/auth/login');
+  print("${IPConfig.getIP()}api/auth/login");
+  final url = Uri.parse("${IPConfig.getIP()}api/auth/login"); 
+  
+
   final headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -65,46 +69,8 @@ Future<http.Response> login(String email, String password) async {
 }
 
 
-
-// Future<List<UserModel>> informationsUtilisateurAPI() async {
-//   print('dans le informationsUtilisateurAPI');
-
-//   final url = Uri.parse('http://localhost:8080/api/utilisateur/me');
-//     var secureStorage = SecureStorage();
-//     String? token = await secureStorage.readToken();
-//   final headers = {
-//     'Content-Type': 'application/json',
-//     'Accept': 'application/json',
-//     'Authorization': 'Bearer ${token}',
-//   };  
-  
-//   try {
-//   final response = await http.get(url, headers: headers);
-//   if (response.statusCode == 200) {
- 
-//   var decodedBody = utf8.decode(response.bodyBytes);
-//       var data = jsonDecode(decodedBody);
-//       var dataInformations = utf8.decode(response.bodyBytes) as Map<String, dynamic>;
-//       print('information sur le dataInfromations[mail] => ${dataInformations['email']}');
-//       print(data);
-//       var user = List<UserModel>.from(data.map((x) => UserModel.fromJson(x)));
-//       print(user);
-//       return user;
-//   }else{
-//     return [];
-//   }
-    
-//   } catch (e) {
-//     print("Exception during request: $e");
-//     return [];
-//   }
-  
-// }
-
-
-
 Future<UserModel> informationsUtilisateurAPI() async {
-  final url = Uri.parse('http://localhost:8080/api/utilisateur/me');
+  final url = Uri.parse('${IPConfig.getIP()}api/utilisateur/me');
   var secureStorage = SecureStorage();
   String? token = await secureStorage.readToken();
   final headers = {

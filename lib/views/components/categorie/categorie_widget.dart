@@ -4,8 +4,8 @@ import './../../resultat_search_filter.dart';
 import 'package:flutter_second/colors/colors.dart';
 import 'package:flutter_second/controllers/produit_controller.dart';
 
-class PageCheckout extends StatelessWidget {
-  const PageCheckout({super.key});
+class Categorie extends StatelessWidget {
+  const Categorie({super.key});
 
   @override
   Widget build(BuildContext context) {

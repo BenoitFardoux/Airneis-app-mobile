@@ -3,8 +3,7 @@ import 'package:flutter_second/models/produit.dart';
 import 'package:flutter_second/views/components/panier/panier_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_second/controllers/produit_controller.dart';
-import './../../../models/produit.dart';
-import './../../main_app.dart';
+import './../checkout/checkout_widget.dart';
 
 
 class PanierManage extends StatelessWidget {
@@ -61,7 +60,14 @@ class PanierManage extends StatelessWidget {
       //      child: Text("Ajouter au panier")),
 
       ElevatedButton(
-        onPressed: (){}, 
+        onPressed: (){
+
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CheckoutWidget()),
+            );
+
+        }, 
         child: Text("Passer la commande"))
 
       ]),

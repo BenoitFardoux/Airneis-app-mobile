@@ -1,9 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import './../models/adresse.dart';
+import './../assets/ip/ip.dart';
 
 Future<List<Adresse>> getProduit() async {
-  var url = Uri.parse('http://localhost:8080/api/airneis/produits?pageNumber=0&pageSize=10');// URL pour l'adresse
+  var url = Uri.parse('${IPConfig.getIP()}api/airneis/produits?pageNumber=0&pageSize=10');// URL pour l'adresse
   
   try {
     var response = await http.get(url);

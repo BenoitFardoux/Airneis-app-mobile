@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_second/api/user.dart';
-import 'package:flutter_second/views/components/auth/profile_screen.dart';
+import 'package:flutter_second/views/components/auth/profil_screen.dart';
 
 class RegisterForm extends StatefulWidget {
   @override
@@ -56,7 +56,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     Navigator.of(context).pop(),
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ProfileScreen()),
+                      MaterialPageRoute(builder: (context) => UserProductsScreen()),
                     ),
                   },
                 ),

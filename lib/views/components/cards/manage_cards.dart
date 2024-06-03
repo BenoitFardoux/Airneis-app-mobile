@@ -9,14 +9,12 @@ class ManageCardsLess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     var providerName = Provider.of<ItemCardController>(context);
-   
+
     return Scaffold(
       appBar: AppBar(title: Text('Manage Cards')),
       body: Padding(
-        padding: const EdgeInsets.only(
-            top: 10.0, bottom: 20.0), // Ajoutez vos valeurs de padding ici
+        padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
         child: Column(
           children: [
             Expanded(
@@ -28,7 +26,6 @@ class ManageCardsLess extends StatelessWidget {
                     card: card,
                     onSetDefault: () => providerName.setDefaultCard(index),
                     onEdit: () {
-                      // Logique pour éditer la carte
                       print("Edit logic here");
                     },
                     onDelete: () => providerName.removeItem(card),
@@ -36,7 +33,7 @@ class ManageCardsLess extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(height: 10.0), // Ajoutez votre valeur de hauteur ici
+            SizedBox(height: 10.0),
             AddCardList(),
           ],
         ),

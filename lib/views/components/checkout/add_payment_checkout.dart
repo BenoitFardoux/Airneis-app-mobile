@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import '../../../controllers/item_card_controller.dart';
 import '../../../models/card_item.dart';
 import './confirmation_widget.dart';
-
-
-
 
 class AddCardPaymentCheckout extends StatelessWidget {
   final CardItem? card;
@@ -77,12 +73,6 @@ class AddCardPaymentCheckoutSub extends StatelessWidget {
                     label: 'Nom',
                     placeHolder: 'nom'),
               ),
-              // Container(
-              //   width: 200,
-              //   child: TextFieldCard(label: 'CVV', placeHolder: 'CVV'),
-              // ),
-              // SizedBox(height: 20),
-
               ElevatedButton(
                 onPressed: () {
                   final cardNumber = cardNumberController.text;

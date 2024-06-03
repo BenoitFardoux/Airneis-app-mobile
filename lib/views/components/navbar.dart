@@ -19,8 +19,6 @@ class NavBar_Icons_Title extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    var secure = SecureStorage();
-
     return AppBar(
       backgroundColor: ColorsApp.secondaryColor,
       title: Text(nameOfApplication,
@@ -65,7 +63,6 @@ class NavBar_Drawer extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData && snapshot.data != null) {
-              // Utilisateur connecté, afficher le menu pour les utilisateurs connectés
               return ListView(
                 children: [
                   ListTile(
@@ -146,11 +143,9 @@ class NavBar_Drawer extends StatelessWidget {
                       Navigator.pop(context);
                     },
                   ),
-                  // Ajouter d'autres options spécifiques à l'utilisateur connecté
                 ],
               );
             } else {
-              // Utilisateur non connecté, afficher le menu pour les visiteurs
               return ListView(
                 children: [
                   ListTile(
@@ -163,12 +158,10 @@ class NavBar_Drawer extends StatelessWidget {
                       );
                     },
                   ),
-                  // Ajouter d'autres options spécifiques à l'utilisateur non connecté
                 ],
               );
             }
           } else {
-            // En attendant la réponse, afficher un indicateur de chargement
             return Center(child: CircularProgressIndicator());
           }
         },

@@ -21,9 +21,7 @@ class AddAdressList extends StatelessWidget {
         children: [
           Text('ajouter une adresse',
               style: TextStyle(
-                  color: Colors.amber,
-                  fontSize: 20,
-                  fontFamily: 'Roboto')),
+                  color: Colors.amber, fontSize: 20, fontFamily: 'Roboto')),
           IconButton(
             icon: Icon(Icons.add),
             color: Colors.amber[400],

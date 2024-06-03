@@ -13,8 +13,7 @@ class ManageAdress extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Manage Adress')),
       body: Padding(
-        padding: const EdgeInsets.only(
-            top: 10.0, bottom: 20.0), // Ajoutez vos valeurs de padding ici
+        padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
         child: Column(
           children: [
             Expanded(
@@ -24,14 +23,12 @@ class ManageAdress extends StatelessWidget {
                   var adresseProvider = providerName.items[index];
                   return AdresseWidget(
                     adresse: adresseProvider,
-                    
                   );
                 },
               ),
             ),
             SizedBox(height: 10.0),
-            AddAdressList() // Ajoutez votre valeur de hauteur ici
-            
+            AddAdressList()
           ],
         ),
       ),

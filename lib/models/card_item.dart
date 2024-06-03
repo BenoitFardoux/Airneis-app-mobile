@@ -15,13 +15,13 @@ class CardItem {
   factory CardItem.fromJson(Map<String, dynamic> json) {
     
     return CardItem(
-      numero: json['numeroCarte'] ?? 'par défaut number',
-      nom: json['nomCarte'] ?? 'par défaut',
-      Month: json['Month'] ?? 'par défaut le mois',
-      Year: json['Year'] ?? 'par défaut an',
-      dateExpiration: json['dateExpiration'] ?? 'par défaut dateExpiration',
-      codeSecurite: json['codeSecurite'] ?? 'par défaut codeSecurite',
-      isFavorite: json['isFavorite'] ?? false,
+      numero: json['numeroCarte'] ,
+      nom: json['nomCarte'] ,
+      Month: json['Month'],
+      Year: json['Year'],
+      dateExpiration: json['dateExpiration'],
+      codeSecurite: json['codeSecurite'],
+      isFavorite: json['isFavorite'],
     );
   }                      
 }

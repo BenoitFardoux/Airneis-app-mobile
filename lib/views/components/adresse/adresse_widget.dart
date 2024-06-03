@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_second/models/adresse.dart';
 
-
-class AdresseWidget extends StatelessWidget{
-
+class AdresseWidget extends StatelessWidget {
   final Adresse adresse;
 
-  AdresseWidget({super.key, required this.adresse});  
+  AdresseWidget({super.key, required this.adresse});
 
-  @override 
-  Widget build(BuildContext context){
-    
+  @override
+  Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          // MyDropdown(dropdownValues: dropdownValues),
           Text(adresse.prenom),
           Text(adresse.nom),
           Text(adresse.codePostal),
@@ -22,9 +18,5 @@ class AdresseWidget extends StatelessWidget{
         ],
       ),
     );
+  }
 }
-}
-
-
-
-

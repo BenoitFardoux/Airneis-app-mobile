@@ -26,6 +26,7 @@ class ItemCardController extends ChangeNotifier {
   void addItem(CardItem card) {
     _items.add(card);
     notifyListeners();
+
   }
 
   void removeItem(CardItem cardItem) {

@@ -3,6 +3,7 @@ class CardItem {
   final String nom;
   final String Month; 
   final String Year; 
+<<<<<<< HEAD
    String dateExpiration;
    String codeSecurite; 
   bool isFavorite;
@@ -24,4 +25,10 @@ class CardItem {
       isFavorite: json['isFavorite'],
     );
   }                      
+=======
+  bool isFavorite;
+
+
+  CardItem({required this.numero, required this.nom, required this.Month, required this.Year, required this.isFavorite});                                
+>>>>>>> main
 }

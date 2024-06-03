@@ -95,7 +95,7 @@ class CategorieResultsPage extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   // builder: (context) => ProductDetailPage(produit: produit),
-                  builder: (context) => ProductDetailPage(produit: produit),
+                  builder: (context) => ProductDetailPageScreen(produit: produit),
                 ),
               );
             },

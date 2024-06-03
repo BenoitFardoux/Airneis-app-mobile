@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_second/controllers/produit_controller.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_second/views/main_app.dart';
 // import 'package:flutter_second/controllers/produit_controller.dart';
 
 import './../colors/colors.dart';
@@ -8,6 +9,17 @@ import './../colors/colors.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import './main_app.dart';
+
+
+class FilteredResultPageScreen extends StatelessWidget {
+  FilteredResultPageScreen({super.key, this.filteredArticles, this.NomRecherche});
+  final  filteredArticles;
+  final NomRecherche;
+  @override
+  Widget build(BuildContext context) {
+    return MainApp(body: FilteredResultsPage(filteredArticles: filteredArticles, NomRecherche: NomRecherche));
+  }
+}
 
 class FilteredResultsPage extends StatelessWidget {
   final List filteredArticles;
@@ -19,14 +31,7 @@ class FilteredResultsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        // backgroundColor: Color(0xFFF7F2F9),
-        title: Text(NomRecherche, style: TextStyle(color: ColorsApp.textColor)),
-        elevation: 3.0, // Retirer l'ombre par défaut
-      
-      ),
-      body: ListView.builder(
+    return ListView.builder(
         itemCount: filteredArticles.length,
         itemBuilder: (context, index) {
           final produit = filteredArticles[index];
@@ -40,7 +45,7 @@ class FilteredResultsPage extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   // builder: (context) => ProductDetailPage(produit: produit),
-                  builder: (context) => ProductDetailPage(produit: produit),
+                  builder: (context) => ProductDetailPageScreen(produit: produit),
                 ),
               );
             },
@@ -91,12 +96,24 @@ class FilteredResultsPage extends StatelessWidget {
             ),
           );
         },
-      ),
-    );
+      );
+    
   }
 }
 
 // You will need to create a ProductDetailPage widget that takes a Produit as an argument.
+
+class ProductDetailPageScreen extends StatelessWidget {
+  final produit;
+
+  const ProductDetailPageScreen({Key? key, required this.produit}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MainApp(body: ProductDetailPage(produit: produit));
+  }
+}
+
 
 class ProductDetailPage extends StatelessWidget {
   final produit;

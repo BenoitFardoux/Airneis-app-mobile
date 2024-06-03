@@ -27,6 +27,13 @@ class _CheckoutWidgetState extends State<PaymentCheckoutWidget> {
       child:
     Column(
       children: [
+        IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            // Utilisez Navigator.pop pour retourner à l'écran précédent
+            Navigator.pop(context);
+          },
+        ),
         GenericDropdown<CardItem>(
           items: providerName.items,
           getDisplayValue: (CardItem card) => card.nom,

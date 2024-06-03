@@ -59,7 +59,7 @@ class _LoginFormState extends State<LoginForm> {
       Future.delayed(Duration(seconds: 2), () {
         Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => UserProductsScreen()),
+              MaterialPageRoute(builder: (context) => UserInformations()),
             );
       });
     } catch (e) {

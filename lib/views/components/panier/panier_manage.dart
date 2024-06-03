@@ -4,6 +4,18 @@ import 'package:flutter_second/views/components/panier/panier_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_second/controllers/produit_controller.dart';
 import './../checkout/checkout_widget.dart';
+import 'package:flutter_second/views/main_app.dart';
+
+
+class PanierManageScreen extends StatelessWidget {
+  const PanierManageScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MainApp(body: PanierManage());
+  }
+}
+
 
 
 class PanierManage extends StatelessWidget {

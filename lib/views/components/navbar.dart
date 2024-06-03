@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_second/views/components/auth/profil_screen.dart';
+import 'package:flutter_second/views/homepage.dart';
 import './../../../colors/colors.dart';
 import './../../../utils/secure_storage.dart';
 import './../components/mentions/mentions.dart';
@@ -12,6 +13,9 @@ import 'adresse/manage_adresse.dart';
 import '../search_page_filter.dart';
 import './../components/checkout/checkout_widget.dart';
 import './../components/categorie/categorie_widget.dart';
+import './../components/checkout/checkout_widget.dart';
+
+
 
 class NavBar_Icons_Title extends StatelessWidget
     implements PreferredSizeWidget {
@@ -45,7 +49,7 @@ class NavBar_Icons_Title extends StatelessWidget
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PanierManage()),
+              MaterialPageRoute(builder: (context) => PanierManageScreen()),
             );
           },
         ),
@@ -77,14 +81,22 @@ class NavBar_Drawer extends StatelessWidget {
                     leading: Icon(Icons.home),
                     title: const Text('Accueil'),
                     onTap: () {
-                      Navigator.pop(context);
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomePageScreen()),
+                      );
                     },
                   ),
                   ListTile(
                     leading: Icon(Icons.settings),
                     title: const Text('Mes paramètres'),
                     onTap: () {
-                      Navigator.pop(context);
+                       Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => UserInformations()),
+                      );
                     },
                   ),
                   ListTile(
@@ -101,7 +113,7 @@ class NavBar_Drawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => TermsAndConditionsWidget()),
+                            builder: (context) => TermsAndConditionsWidgetScreen()),
                       );
                     },
                   ),
@@ -112,7 +124,7 @@ class NavBar_Drawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => LegalNoticeWidget()),
+                            builder: (context) => LegalNoticeWidgetScreen()),
                       );
                     },
                   ),
@@ -131,7 +143,7 @@ class NavBar_Drawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AboutUsWidget()),
+                            builder: (context) => AboutUsWidgetScreen()),
                       );
                     },
                   ),

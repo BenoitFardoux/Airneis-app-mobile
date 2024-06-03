@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_second/views/main_app.dart';
+
+class LegalNoticeWidgetScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MainApp(body: LegalNoticeWidget());
+  }}
 
 class LegalNoticeWidget extends StatelessWidget {
   @override
@@ -26,6 +33,13 @@ class LegalNoticeWidget extends StatelessWidget {
   }
 }
 
+
+class PrivacyPolicyWidgetScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MainApp(body: PrivacyPolicyWidget());
+  }}
+
 class PrivacyPolicyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -45,6 +59,13 @@ class PrivacyPolicyWidget extends StatelessWidget {
     );
   }
 }
+
+
+class TermsAndConditionsWidgetScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MainApp(body: TermsAndConditionsWidget());
+  }}
 
 class TermsAndConditionsWidget extends StatelessWidget {
   @override
@@ -73,7 +94,7 @@ class TermsAndConditionsWidget extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => PrivacyPolicyWidget()),
+                        builder: (context) => PrivacyPolicyWidgetScreen()),
                   );
                 },
             ),
@@ -89,7 +110,11 @@ class TermsAndConditionsWidget extends StatelessWidget {
 }
 
 
-
+class AboutUsWidgetScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MainApp(body: AboutUsWidget());
+  }}
 
 
 class AboutUsWidget extends StatelessWidget {

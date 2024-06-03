@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_second/views/main_app.dart';
 import 'package:flutter_second/colors/colors.dart';
+import 'package:flutter_second/views/main_app.dart';
+import './../../homepage.dart';
 
 
+
+class ConfirmationWidgetScreen extends StatelessWidget {
+  const ConfirmationWidgetScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MainApp(body: ConfirmationWidget());
+  }
+}
 
 class ConfirmationWidget extends StatelessWidget {
   const ConfirmationWidget({super.key});
@@ -27,7 +38,7 @@ class ConfirmationWidget extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MainApp()),
+                MaterialPageRoute(builder: (context) => HomePageScreen()),
               );
             },
             child: Text('Continuer mes achats', style: TextStyle(fontSize: 20, fontFamily: 'NotoSans', color: ColorsApp.textColor)),

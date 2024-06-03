@@ -5,6 +5,17 @@ import './../adresse/manage_adresse.dart';
 import './../cards/manage_cards.dart';
 import './../../main_app.dart';
 
+
+
+class UserInformations extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MainApp(body: UserProductsScreen());
+  }
+}
+
+
+
 class UserProductsScreen extends StatefulWidget {
   @override
   _UserProductsScreenState createState() => _UserProductsScreenState();

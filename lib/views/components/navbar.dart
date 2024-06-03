@@ -19,8 +19,6 @@ class NavBar_Icons_Title extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    var secure = SecureStorage();
-
     return AppBar(
       backgroundColor: ColorsApp.secondaryColor,
       title: Text(nameOfApplication,

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_second/controllers/item_card_controller.dart';
-import 'package:flutter_second/views/components/adresse/adresse_widget.dart';
-import 'package:flutter_second/models/adresse.dart';
-import 'add_adress_checkout.dart';
+
 import './checkout_widget.dart';
 import './../../../models/card_item.dart'; 
 import './add_payment_checkout.dart';// Assurez-vous que le chemin d'import est correct

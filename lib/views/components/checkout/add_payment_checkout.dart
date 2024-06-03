@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_second/views/components/cards/manage_cards.dart';
+
 import 'package:provider/provider.dart';
 import '../../../controllers/item_card_controller.dart';
 import '../../../models/card_item.dart';
 import './confirmation_widget.dart';
-import 'package:flutter_second/views/main_app.dart';
 
-// class AddCardPaymentCheckoutScreen extends StatelessWidget{
-//   const AddCardPaymentCheckoutScreen({super.key, this.card});
-//   final CardItem? card;
 
-//   @override
-//   Widget build(BuildContext context){
-//     return MainApp(body: AddCardPaymentCheckout(card: card));
-//   }
-// }
+
 
 class AddCardPaymentCheckout extends StatelessWidget {
   final CardItem? card;
@@ -101,7 +93,7 @@ class AddCardPaymentCheckoutSub extends StatelessWidget {
                   print("mois: $cardMonth, année: $cardYear");
 
                   CardItem card = CardItem(
-                      numero: int.parse(cardNumber),
+                      numero: cardNumber,
                       nom: cardName,
                       Month: cardMonth,
                       Year: cardYear,

@@ -9,7 +9,9 @@ class ManageCardsLess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     var providerName = Provider.of<ItemCardController>(context);
+   
     return Scaffold(
       appBar: AppBar(title: Text('Manage Cards')),
       body: Padding(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_second/models/produit.dart';
+
 import 'package:flutter_second/views/components/panier/panier_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_second/controllers/produit_controller.dart';
@@ -32,14 +32,10 @@ class PanierManage extends StatelessWidget {
         Expanded(child: 
              ListView.builder(
               itemCount: provider.items.length,
-              // itemCount: Provider.of<ProduitControllerTest>(context, listen: true).items.length,
+             
               itemBuilder: (context, index) {
                 print("identifiant unique dans mon panier dnas le build => ${identityHashCode(provider)}");
-                // return ListTile(
-                  
-                //   title: Text(provider.items[index].nom),
-                //   // autres propriétés
-                // );
+              
                 print(provider.items[index].images[0].url);
                 print(provider.items[index].id);
                 print(provider.items[index].prix);

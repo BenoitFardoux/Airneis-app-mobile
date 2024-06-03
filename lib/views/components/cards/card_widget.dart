@@ -75,9 +75,10 @@ class CardWidget extends StatelessWidget {
                  // Marqueur visuel pour carte par défaut
                     
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
 
-              Text('**** **** **** ${card.numero}',
+              Text('**** **** **** ${card.numero.substring(card.numero.length - 4)}',
                   style: TextStyle(fontSize: 18, color: Colors.white)),
               Text(card.nom,
                   style: TextStyle(fontSize: 16, color: Colors.white)),

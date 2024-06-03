@@ -1,4 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
+
 import 'package:flutter_second/views/main_app.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';

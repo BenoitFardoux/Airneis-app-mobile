@@ -4,18 +4,9 @@ import 'package:flutter_second/views/homepage.dart';
 import './../../../colors/colors.dart';
 import './../../../utils/secure_storage.dart';
 import './../components/mentions/mentions.dart';
-
 import 'package:flutter_second/views/components/auth/login_screen.dart';
-import 'cards/manage_cards.dart';
 import 'panier/panier_manage.dart';
-import 'adresse/manage_adresse.dart';
-
 import '../search_page_filter.dart';
-import './../components/checkout/checkout_widget.dart';
-import './../components/categorie/categorie_widget.dart';
-import './../components/checkout/checkout_widget.dart';
-
-
 
 class NavBar_Icons_Title extends StatelessWidget
     implements PreferredSizeWidget {
@@ -81,7 +72,7 @@ class NavBar_Drawer extends StatelessWidget {
                     leading: Icon(Icons.home),
                     title: const Text('Accueil'),
                     onTap: () {
-                        Navigator.push(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => HomePageScreen()),
@@ -92,7 +83,7 @@ class NavBar_Drawer extends StatelessWidget {
                     leading: Icon(Icons.settings),
                     title: const Text('Mes paramètres'),
                     onTap: () {
-                       Navigator.push(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => UserInformations()),
@@ -113,7 +104,8 @@ class NavBar_Drawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => TermsAndConditionsWidgetScreen()),
+                            builder: (context) =>
+                                TermsAndConditionsWidgetScreen()),
                       );
                     },
                   ),
@@ -139,7 +131,6 @@ class NavBar_Drawer extends StatelessWidget {
                     leading: Icon(Icons.description),
                     title: const Text("A propos d'Airneis"),
                     onTap: () {
-                      
                       Navigator.push(
                         context,
                         MaterialPageRoute(

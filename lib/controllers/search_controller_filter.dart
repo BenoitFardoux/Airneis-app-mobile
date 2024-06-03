@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import '../models/article.dart';
+
 import './../api/produit.dart';
 
 class SearchControllerFilter extends ChangeNotifier {

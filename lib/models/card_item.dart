@@ -1,5 +1,5 @@
 class CardItem {
-  final int numero;
+  final String numero;
   final String nom;
   final String Month; 
   final String Year; 

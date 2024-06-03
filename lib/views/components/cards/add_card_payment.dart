@@ -3,7 +3,7 @@ import 'package:flutter_second/views/components/cards/manage_cards.dart';
 import 'package:provider/provider.dart';
 // import '../controllers/list_cards_ controller.dart';
 import '../../../controllers/item_card_controller.dart';
-import 'card_widget.dart';
+
 import '../../../models/card_item.dart';
 
 
@@ -78,7 +78,7 @@ class AddCardPaymentLess extends StatelessWidget {
                   var favorite = false;
                   print("mois: $cardMonth, année: $cardYear");
 
-                  CardItem card = CardItem(numero: int.parse(cardNumber), nom: cardName, Month: cardMonth, Year: cardYear, isFavorite: favorite);
+                  CardItem card = CardItem(numero: cardNumber, nom: cardName, Month: cardMonth, Year: cardYear, isFavorite: favorite);
                   
                   providerName.addItem(card);
                   

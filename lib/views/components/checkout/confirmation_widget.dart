@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_second/views/main_app.dart';
 import 'package:flutter_second/colors/colors.dart';
-import 'package:flutter_second/views/main_app.dart';
+
 import './../../homepage.dart';
 
 

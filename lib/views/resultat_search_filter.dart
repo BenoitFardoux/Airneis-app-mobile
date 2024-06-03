@@ -2,14 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_second/controllers/produit_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_second/views/main_app.dart';
-// import 'package:flutter_second/controllers/produit_controller.dart';
-
 import './../colors/colors.dart';
-// import '../models/produit.dart'; // Assurez-vous que le chemin d'import est correct
-
 import 'package:carousel_slider/carousel_slider.dart';
-import './main_app.dart';
-
 
 class FilteredResultPageScreen extends StatelessWidget {
   FilteredResultPageScreen({super.key, this.filteredArticles, this.NomRecherche});

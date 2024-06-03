@@ -56,7 +56,8 @@ class _RegisterFormState extends State<RegisterForm> {
                     Navigator.of(context).pop(),
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => UserProductsScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => UserProductsScreen()),
                     ),
                   },
                 ),

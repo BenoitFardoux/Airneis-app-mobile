@@ -12,8 +12,6 @@ class MyScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final authProvider = Provider.of<AuthProvider>(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(this.name, style: TextStyle(color: Colors.white)),
@@ -26,9 +24,6 @@ class MyScaffold extends StatelessWidget {
               Navigator.pushNamed(context, '/users');
             },
           ),
-        
-          
-          
         ],
       ),
       backgroundColor: const Color.fromRGBO(255, 255, 255, 1),

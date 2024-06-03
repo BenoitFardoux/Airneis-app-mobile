@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import '../controllers/search_controller.dart' as sc; // Utiliser un alias
-import '../controllers/search_controller_filter.dart'
-    as sc; // Utiliser un alias
-// import './components/produit_detail.dart';// Utiliser un alias
+import '../controllers/search_controller_filter.dart' as sc;
 import './resultat_search_filter.dart';
 
 class SearchPageFilter extends StatelessWidget {
@@ -45,18 +42,21 @@ class SearchPageFilter extends StatelessWidget {
                           _materialsFilter(controller),
                           _categoriesFilter(controller),
                           _dimensionFilters(controller),
-                          // _stockSwitch(controller),
                           ElevatedButton(
                             onPressed: () {
-                              controller
-                                  .filterArticles(); // Appliquez les filtres
-                              // Naviguez vers la page de résultats filtrés
+                              controller.filterArticles();
+
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => FilteredResultPageScreen(
-                                        filteredArticles:
-                                            controller.filteredArticles, NomRecherche: controller.searchController.text.toLowerCase().toString())),
+                                    builder: (context) =>
+                                        FilteredResultPageScreen(
+                                            filteredArticles:
+                                                controller.filteredArticles,
+                                            NomRecherche: controller
+                                                .searchController.text
+                                                .toLowerCase()
+                                                .toString())),
                               );
                             },
                             child: Text('Apply Filters'),
@@ -80,11 +80,9 @@ class SearchPageFilter extends StatelessWidget {
       children: <Widget>[
         _priceFilter(
             "Price",
-            controller.priceRange ??
-                RangeValues(0,
-                    10000), // Assurez-vous que les valeurs par défaut sont logiques
+            controller.priceRange ?? RangeValues(0, 10000),
             0,
-            10000, // Mettez ici la valeur maximale que vous jugez appropriée pour le prix
+            10000,
             (RangeValues values) =>
                 controller.updateFilters(newPriceRange: values)),
       ],
@@ -110,33 +108,18 @@ class SearchPageFilter extends StatelessWidget {
   }
 
   Widget _materialsFilter(sc.SearchControllerFilter controller) {
-    // Placeholder for materials filter
     return ListTile(
       title: Text('Materials'),
-      subtitle: Text('Select materials'), // Implement selection logic as needed
+      subtitle: Text('Select materials'),
     );
   }
 
   Widget _categoriesFilter(sc.SearchControllerFilter controller) {
-    // Placeholder for categories filter
     return ListTile(
       title: Text('Categories'),
-      subtitle:
-          Text('Select categories'), // Implement selection logic as needed
+      subtitle: Text('Select categories'),
     );
   }
-
-  // Widget _stockSwitch(sc.SearchControllerFilter controller) {
-  //   return SwitchListTile(
-  //     title: Text('Only In Stock'),
-  //     // value: controller.inStockOnly,
-  //     value: false,
-  //     onChanged: (bool value) {
-  //       print('stock');
-  //       // controller.updateFilters(newInStockOnly: value);
-  //     },
-  //   );
-  // }
 }
 
 Widget _dimensionFilters(sc.SearchControllerFilter controller) {

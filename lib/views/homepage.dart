@@ -22,10 +22,24 @@ class HomePageWidget extends StatelessWidget {
       var produitController =
           Provider.of<ProduitControllerTest>(context, listen: false);
 
+
+          if (produitController.items.isEmpty) {
+        // Gérer le cas où la liste est vide
+        return Container(
+          child: Center(
+            child: Text('Aucun élément disponible.'),
+          ),
+        );
+      }
+      
       return Container(
           child: Column(
         children: [
           MyCarouselWidget(),
+
+
+
+
           CategorieHomePage(ProviderName: produitController.items[0]),
         ],
       ));

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_second/views/components/auth/login.dart';
-// import 'package:flutter_second/views/components/cards/add_card_payment.dart';
-// import 'package:provider/provider.dart';
-// import './../components/auth/register_screen.dart'; 
+import 'package:flutter_second/views/components/auth/profil_screen.dart';
+import 'package:flutter_second/views/homepage.dart';
+import './../../../colors/colors.dart';
+import './../../../utils/secure_storage.dart';
+import './../components/mentions/mentions.dart';
 import 'package:flutter_second/views/components/auth/login_screen.dart';
-import 'cards/manage_cards.dart'; // Import correct de ManageCards
-import 'panier/panier_manage.dart'; // Import correct de ManageCards
-// import '../test.dart'; // Import correct de test
-import '../search_page.dart'; // Import correct de CardItem
-import '../search_page_filter.dart'; // Import correct de CardItem
+import 'panier/panier_manage.dart';
+import '../search_page_filter.dart';
+
 
 class NavBar_Icons_Title extends StatelessWidget
     implements PreferredSizeWidget {
@@ -22,43 +21,28 @@ class NavBar_Icons_Title extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Color(0xFFBA58268),
-      title:
-          Text(nameOfApplication, style: TextStyle(color: Color(0xFFBE6C077))),
+      backgroundColor: ColorsApp.secondaryColor,
+      title: Text(nameOfApplication,
+          style: TextStyle(color: ColorsApp.primaryColor)),
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.search),
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SearchPage()),
+              MaterialPageRoute(builder: (context) => SearchPageFilter()),
             );
           },
         ),
        
-        if (true) // Afficher l'icône d'inscription si non connecté
-          // Afficher l'icône de profil si connecté
-          IconButton(
-            icon: Icon(Icons.person_outline),
-            onPressed: () {
-              // Navigator.pushNamed(context, '/profile');
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LoginScreen()),
-            );
-            },
-          )
-        else
-          IconButton(
-            icon: Icon(Icons.person),
-            onPressed: () {
-              // Navigator.pushNamed(context, '/users');
-            },
-          ),
+       
         IconButton(
           icon: Icon(Icons.shopping_cart),
           onPressed: () {
-            print('Alerte ajoutée');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PanierManageScreen()),
+            );
           },
         ),
       ],
@@ -74,53 +58,116 @@ class NavBar_Drawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var secure = SecureStorage();
+
     return Drawer(
-      child: ListView(
-        children: [
-          ListTile(
-            title: const Text('Gestion des cartes'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ManageCardsLess()), // Ajout de const
+      child: FutureBuilder<String?>(
+        future: secure.readToken(),
+        builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData && snapshot.data != null) {
+              return ListView(
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: const Text('Accueil'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomePageScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.settings),
+                    title: const Text('Mes paramètres'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => UserInformations()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.shopping_bag),
+                    title: const Text('Mes commandes'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.assignment),
+                    title: const Text('CGU'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                TermsAndConditionsWidgetScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.gavel),
+                    title: const Text('Mentions légales'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LegalNoticeWidgetScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.contacts),
+                    title: const Text('Contact'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.description),
+                    title: const Text("A propos d'Airneis"),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AboutUsWidgetScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.logout),
+                    title: const Text('Déconnexion'),
+                    onTap: () {
+                      secure.deleteCredentials();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
               );
-            },
-          ),
-         
-         
-          ListTile(
-            title: const Text('rechercher un article par mot clé'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const SearchPage()), // Ajout de const
+            } else {
+              return ListView(
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.login),
+                    title: const Text('Connexion'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                      );
+                    },
+                  ),
+                ],
               );
-            },
-          ),
-          ListTile(
-            title: const Text('panier'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => PanierManage()), // Ajout de const
-              );
-            },
-          ),
-          ListTile(
-            title: const Text('new panier with filters'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SearchPageFilter()), // Ajout de const
-              );
-            },
-          ),
-          
-        ],
+            }
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }

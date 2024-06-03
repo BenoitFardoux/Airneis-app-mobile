@@ -10,30 +10,33 @@ class ManageCardsLess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var providerName = Provider.of<ItemCardController>(context);
+
     return Scaffold(
       appBar: AppBar(title: Text('Manage Cards')),
-      body: Column(
-        children: [
-          Expanded(
-  child: ListView.builder(
-    itemCount: providerName.items.length,
-    itemBuilder: (context, index) {
-      var card = providerName.items[index];
-      return CardWidget(
-        card: card,
-        onSetDefault: () => providerName.setDefaultCard(index),
-        onEdit: () {
-          // Logique pour éditer la carte
-          print("Edit logic here");
-        },
-        onDelete: () => providerName.removeItem(card),
-      );
-    },
-  ),
-),
-
-          AddCardList(),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: providerName.items.length,
+                itemBuilder: (context, index) {
+                  var card = providerName.items[index];
+                  return CardWidget(
+                    card: card,
+                    onSetDefault: () => providerName.setDefaultCard(index),
+                    onEdit: () {
+                      print("Edit logic here");
+                    },
+                    onDelete: () => providerName.removeItem(card),
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 10.0),
+            AddCardList(),
+          ],
+        ),
       ),
     );
   }

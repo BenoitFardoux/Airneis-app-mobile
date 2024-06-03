@@ -1,9 +1,9 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import './../models/produit.dart';
+import './../models/adresse.dart';
 import './../assets/ip/ip.dart';
 
-Future<List<Produit>> getProduit() async {
+Future<List<Adresse>> getProduit() async {
   var url = Uri.parse(
       '${IPConfig.getIP()}api/airneis/produits?pageNumber=0&pageSize=10');
 
@@ -13,10 +13,9 @@ Future<List<Produit>> getProduit() async {
     if (response.statusCode == 200) {
       var decodedBody = utf8.decode(response.bodyBytes);
       var data = jsonDecode(decodedBody)['_embedded'];
-      print(data);
 
-      List<Produit> produits = List<Produit>.from(
-          data['produitRestRessourceList'].map((x) => Produit.fromJson(x)));
+      List<Adresse> produits = List<Adresse>.from(
+          data['produitRestRessourceList'].map((x) => Adresse.fromJson(x)));
       return produits;
     } else {
       print(

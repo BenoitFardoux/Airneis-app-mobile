@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-
-
 class MyCarouselWidget extends StatelessWidget {
   final List<String> imageUrls = [
     'https://media.istockphoto.com/id/1312439845/fr/photo/int%C3%A9rieur-%C3%A9l%C3%A9gant-de-salle-de-salon-avec-de-belles-usines-de-maison.jpg?s=2048x2048&w=is&k=20&c=AVuJePyuQRPCPUt9B93IvkrU5i7-RkgwoNTpNOeMR8E=',
@@ -12,16 +10,15 @@ class MyCarouselWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size; // Obtenez la taille de l'écran
+    Size size = MediaQuery.of(context).size;
 
     return CarouselSlider(
       options: CarouselOptions(
-        height: size.height * 0.3, // Hauteur personnalisée du carrousel
+        height: size.height * 0.3,
         autoPlay: true,
         enlargeCenterPage: true,
         enableInfiniteScroll: true,
-        viewportFraction:
-            1.0, // Assurez-vous que chaque image prend toute la largeur du viewport
+        viewportFraction: 1.0,
       ),
       items: imageUrls
           .map((url) => GestureDetector(
@@ -33,11 +30,8 @@ class MyCarouselWidget extends StatelessWidget {
                       ));
                 },
                 child: Container(
-                  width: size
-                      .width, // Appliquez la largeur de l'écran au conteneur
-                  child: Image.network(url,
-                      fit: BoxFit
-                          .cover), // Utilisez BoxFit.cover pour remplir l'espace
+                  width: size.width,
+                  child: Image.network(url, fit: BoxFit.cover),
                 ),
               ))
           .toList(),

@@ -27,8 +27,10 @@ class Produit {
       prix: json['prix'].toDouble(),
       dimension: Dimension.fromJson(json['dimension']),
       categorie: Categorie.fromJson(json['categorie']),
-      images: List<ImageProduit>.from(json['images'].map((x) => ImageProduit.fromJson(x))),
-      materiaux: List<Materiau>.from(json['materiaux'].map((x) => Materiau.fromJson(x))),
+      images: List<ImageProduit>.from(
+          json['images'].map((x) => ImageProduit.fromJson(x))),
+      materiaux: List<Materiau>.from(
+          json['materiaux'].map((x) => Materiau.fromJson(x))),
     );
   }
 }
@@ -38,7 +40,8 @@ class Dimension {
   final double largeur;
   final double profondeur;
 
-  Dimension({required this.hauteur, required this.largeur, required this.profondeur});
+  Dimension(
+      {required this.hauteur, required this.largeur, required this.profondeur});
 
   factory Dimension.fromJson(Map<String, dynamic> json) {
     return Dimension(

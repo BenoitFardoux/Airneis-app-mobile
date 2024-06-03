@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'views/main_app.dart';
+import './views/homepage.dart';
 
 void main() {
-  runApp(MainApp());
+  runApp(HomePageScreen());
 }
 
 

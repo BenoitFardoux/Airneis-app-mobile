@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_second/views/components/auth/profile_screen.dart';
+import 'package:flutter_second/views/components/auth/profil_screen.dart';
 import 'package:provider/provider.dart';
-
 import './../../../api/user.dart';
 import './../../../provider/auth_provider.dart';
 import './../../../utils/secure_storage.dart';
@@ -40,13 +39,13 @@ class _LoginFormState extends State<LoginForm> {
     });
 
     try {
-      final response = 
+      final response =
           await login(_emailController.text, _passwordController.text);
       final responseData = json.decode(response.body);
 
       await secureStorage.saveCredentials(
           _emailController.text, _passwordController.text);
-          print("valuer de response[data] ${responseData['token']}");
+      print("valuer de response[data] ${responseData['token']}");
       await secureStorage.saveToken(responseData['token']);
 
       Provider.of<AuthProvider>(context, listen: false).login();
@@ -57,9 +56,9 @@ class _LoginFormState extends State<LoginForm> {
 
       Future.delayed(Duration(seconds: 2), () {
         Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfileScreen()),
-            );
+          context,
+          MaterialPageRoute(builder: (context) => UserInformations()),
+        );
       });
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -110,7 +109,6 @@ class _LoginFormState extends State<LoginForm> {
                   },
                   child: Text('Login'),
                 ),
-            
         ],
       ),
     );

@@ -1,51 +1,14 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_second/views/components/produit.dart';
-
-// import '../api/produit.dart'; 
-import '../models/produit.dart';// Assurez-vous que ce fichier existe et contient la classe CardItem
+import '../models/produit.dart';
 
 class ProduitControllerTest extends ChangeNotifier {
-  List _produits = [Produit(
-    id: "1",
-    nom: "Chaise Moderne",
-    description: "Une chaise moderne confortable et élégante",
-    prix: 120.0,
-    dimension: Dimension(
-      hauteur: 120.0,
-      largeur: 50.0,
-      profondeur: 40.0,
-    ),
-    categorie: Categorie(
-      id: "cat1",
-      nom: "Meubles",
-    ),
-    images: [
-      ImageProduit(
-        url: "https://example.com/image1.jpg",
-        description: "Vue de face de la chaise moderne",
-      )
-    ],
-    materiaux: [
-      Materiau(
-        id: "mat1",
-        nom: "Bois",
-      )
-    ],
-  )];
-
-  // ProduitController() {
-  //   createAndAddProduct();
-  //   print(items);
-  //   notifyListeners();
-  //   // retrieveProduits();
-  // }
+  List _produits = [];
 
   List get items => _produits;
 
-  void addItem(Produit produit) {
+  addItem(Produit produit) {
     _produits.add(produit);
-    print( 'items => ${items}');
-    print( 'produis => ${_produits}');
+
     notifyListeners();
   }
 
@@ -54,58 +17,7 @@ class ProduitControllerTest extends ChangeNotifier {
     notifyListeners();
   }
 
-  retrieveProduits(){
+  retrieveProduits() {
     return _produits.length;
   }
-
-//   void retrieveProduits() async {   
-     
-//     // _produits = await getProduit();
-//     _produits = items; 
-//     print('dans le retrieve produit');
-//     print(_produits);
-//     notifyListeners(); 
-//   }
-
-// Exemple de création d'un produit
-void createAndAddProduct() {
-  Produit newProduit = Produit(
-    id: "1",
-    nom: "Chaise Moderne",
-    description: "Une chaise moderne confortable et élégante",
-    prix: 120.0,
-    dimension: Dimension(
-      hauteur: 120.0,
-      largeur: 50.0,
-      profondeur: 40.0,
-    ),
-    categorie: Categorie(
-      id: "cat1",
-      nom: "Meubles",
-    ),
-    images: [
-      ImageProduit(
-        url: "https://example.com/image1.jpg",
-        description: "Vue de face de la chaise moderne",
-      )
-    ],
-    materiaux: [
-      Materiau(
-        id: "mat1",
-        nom: "Bois",
-      )
-    ],
-  );
-
-  // Supposons que vous avez une instance de ProduitController appelée produitCtrl
-//  addItem(newProduit);
-// addItem("test"); 
-notifyListeners();
 }
-
-
-
-}
-
-
-

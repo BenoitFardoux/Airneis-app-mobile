@@ -8,8 +8,7 @@ import 'package:flutter_second/views/components/auth/login_screen.dart';
 import 'panier/panier_manage.dart';
 import '../search_page_filter.dart';
 
-class NavBar_Icons_Title extends StatelessWidget
-    implements PreferredSizeWidget {
+
 class NavBar_Icons_Title extends StatelessWidget
     implements PreferredSizeWidget {
   const NavBar_Icons_Title({
@@ -36,25 +35,7 @@ class NavBar_Icons_Title extends StatelessWidget
           },
         ),
        
-        if (true) // Afficher l'icône d'inscription si non connecté
-          // Afficher l'icône de profil si connecté
-          IconButton(
-            icon: Icon(Icons.person_outline),
-            onPressed: () {
-              // Navigator.pushNamed(context, '/profile');
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LoginScreen()),
-            );
-            },
-          )
-        else
-          IconButton(
-            icon: Icon(Icons.person),
-            onPressed: () {
-              // Navigator.pushNamed(context, '/users');
-            },
-          ),
+       
         IconButton(
           icon: Icon(Icons.shopping_cart),
           onPressed: () {

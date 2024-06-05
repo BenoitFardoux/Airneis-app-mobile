@@ -15,6 +15,7 @@ class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   final SecureStorage secureStorage = SecureStorage();
+  final EncryptionService encryptionService = EncryptionService();
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -34,42 +35,44 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   Future<void> _login() async {
-    setState(() {
-      _isLoading = true;
+  setState(() {
+    _isLoading = true;
+  });
+
+  try {
+    // final encryptedPassword = encryptionService.encryptText(_passwordController.text);
+    final plainPassword = _passwordController.text;
+  print("value de encryptedPassword => $plainPassword");
+    final response = await login(_emailController.text, plainPassword);
+    final responseData = json.decode(response.body);
+
+    await secureStorage.saveCredentials(_emailController.text, plainPassword);
+    print("Valeur de response[data] ${responseData['token']}");
+    await secureStorage.saveToken(responseData['token']);
+
+    Provider.of<AuthProvider>(context, listen: false).login();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Authentification réussie')),
+    );
+
+    Future.delayed(Duration(seconds: 2), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => UserInformations()),
+      );
     });
-
-    try {
-      final response =
-          await login(_emailController.text, _passwordController.text);
-      final responseData = json.decode(response.body);
-
-      await secureStorage.saveCredentials(
-          _emailController.text, _passwordController.text);
-      print("valuer de response[data] ${responseData['token']}");
-      await secureStorage.saveToken(responseData['token']);
-
-      Provider.of<AuthProvider>(context, listen: false).login();
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Authentification réussie')),
-      );
-
-      Future.delayed(Duration(seconds: 2), () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => UserInformations()),
-        );
-      });
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Echec de l\'authentification $e')),
-      );
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
-    }
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Echec de l\'authentification $e')),
+    );
+  } finally {
+    setState(() {
+      _isLoading = false;
+    });
   }
+}
+
 
   @override
   Widget build(BuildContext context) {

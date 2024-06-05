@@ -12,7 +12,9 @@ dependencies:
   http: ^1.2.1
   carousel_slider: ^4.2.1 
   provider: ^6.1.2
+  encrypt: ^5.0.0
   flutter_secure_storage: ^9.2.1
+  flutter_dotenv: ^5.0.2
   
 
 
@@ -35,3 +37,5 @@ flutter:
       fonts:
         - asset: lib/assets/fonts/NotoSans-Light.ttf
           
+  assets:
+      - .env  

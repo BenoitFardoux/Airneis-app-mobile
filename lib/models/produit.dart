@@ -21,19 +21,26 @@ class Produit {
 
   factory Produit.fromJson(Map<String, dynamic> json) {
     return Produit(
-      id: json['id'],
-      nom: json['nom'],
-      description: json['description'],
+      id: json['id'] ?? 'par défaut',
+      nom: json['nom'] ?? 'par défaut',
+      description: json['description'] ?? 'par défaut',
       prix: json['prix'].toDouble(),
-      dimension: Dimension.fromJson(json['dimension']),
-      categorie: Categorie.fromJson(json['categorie']),
-      images: List<ImageProduit>.from(
-          json['images'].map((x) => ImageProduit.fromJson(x))),
-      materiaux: List<Materiau>.from(
-          json['materiaux'].map((x) => Materiau.fromJson(x))),
+      dimension: Dimension.fromJson(json['dimension']  ?? {}),
+      categorie: Categorie.fromJson(json['categorie'] ?? {}),
+      images: List<ImageProduit>.from(json['images'].map((x) => ImageProduit.fromJson(x))),
+      materiaux: List<Materiau>.from(json['materiaux'].map((x) => Materiau.fromJson(x))),
     );
   }
+
+
+  @override 
+  String toString() {
+    return 'Produit : {id: $id, nom: $nom, description: $description, prix: $prix, dimension: $dimension, categorie: $categorie, images: $images, materiaux: $materiaux}';
+  }
 }
+
+//TO DO : trouver ce qui provoque le Exception during request: TypeError: null: type 'Null' is not a subtype of type 'String'
+//TO DO : qui n'apparait pas quand on met les valeurs par défaut à l'aide de "??"
 
 class Dimension {
   final double hauteur;
@@ -45,9 +52,9 @@ class Dimension {
 
   factory Dimension.fromJson(Map<String, dynamic> json) {
     return Dimension(
-      hauteur: json['hauteur'],
-      largeur: json['largeur'],
-      profondeur: json['profondeur'],
+      hauteur: json['hauteur'] ?? 0.0,
+      largeur: json['largeur'] ?? 0.0,
+      profondeur: json['profondeur'] ?? 0.0,
     );
   }
 }
@@ -60,8 +67,8 @@ class Categorie {
 
   factory Categorie.fromJson(Map<String, dynamic> json) {
     return Categorie(
-      id: json['id'],
-      nom: json['nom'],
+      id: json['id'] ?? 'par défaut', 
+      nom: json['nom'] ?? 'par défaut',
     );
   }
 }
@@ -74,8 +81,8 @@ class ImageProduit {
 
   factory ImageProduit.fromJson(Map<String, dynamic> json) {
     return ImageProduit(
-      url: json['url'],
-      description: json['description'],
+      url: json['url'] ?? 'par défaut',
+      description: json['description'] ?? 'par défaut',
     );
   }
 }
@@ -88,8 +95,8 @@ class Materiau {
 
   factory Materiau.fromJson(Map<String, dynamic> json) {
     return Materiau(
-      id: json['id'],
-      nom: json['nom'],
+      id: json['id'] ?? 'par défaut',
+      nom: json['nom'] ?? 'par défaut',
     );
   }
 }

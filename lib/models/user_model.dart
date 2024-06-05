@@ -9,8 +9,8 @@ class UserModel {
   final List<CardItem>? paiements;
   final String? numeroTelephone;
   final List<Adresse>? adresse;
-  // final Map<String, dynamic>? panierActuel;
-  // final List<dynamic>? commandes;
+  final PanierActuel? panierActuel;
+  final List<dynamic>? commandes;
 
   UserModel({
     // this.id = 0,
@@ -20,23 +20,51 @@ class UserModel {
     this.paiements,
     this.numeroTelephone,
     this.adresse,
-    // this.panierActuel,
-    // this.commandes
+    this.panierActuel,
+    this.commandes
   });
+
+  // TO DO : exception null qui n'apparait pas quand on met les valeurs par défaut à l'aide de "??"
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       // id: json['id'],
-      lastName: json['prenom'],
-      firstName: json['nom'],
-      email: json['email'],
+      lastName: json['prenom'] ?? 'par défaut',
+      firstName: json['nom'] ?? 'par défaut',
+      email: json['email'] ?? 'par défaut' , 
       paiements: List<CardItem>.from(
           json['paiements'].map((x) => CardItem.fromJson(x))),
-      numeroTelephone: json['numeroTelephone'],
-      adresse:
-          List<Adresse>.from(json['adresse'].map((x) => Adresse.fromJson(x))),
-      // panierActuel: json['panierActuel'],
-      // commandes: json['commandes']
+      numeroTelephone: json['numeroTelephone'] ?? 'par défaut',
+      adresse:          List<Adresse>.from(json['adresse'].map((x) => Adresse.fromJson(x))),
+      panierActuel: PanierActuel.fromJson(json['panierActuel']),
+      commandes: json['commandes']
+    );
+  }
+}
+
+
+class PanierActuel {
+  final List<PanierActuelProduit> produits;
+
+  PanierActuel({required this.produits});
+
+  factory PanierActuel.fromJson(Map<String, dynamic> json) {
+    return PanierActuel(
+      produits: (json['produits'] as List).map((x) => PanierActuelProduit.fromJson(x)).toList(),
+    );
+  }
+}
+
+class PanierActuelProduit {
+  final String id;
+  final int quantite;
+
+  PanierActuelProduit({required this.id, required this.quantite});
+
+  factory PanierActuelProduit.fromJson(Map<String, dynamic> json) {
+    return PanierActuelProduit(
+      id: json['id'] ?? '6644c1b8806ba00ddab5f5dd', 
+      quantite: json['quantite'] ?? 1,
     );
   }
 }

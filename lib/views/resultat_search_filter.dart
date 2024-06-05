@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_second/views/main_app.dart';
 import './../colors/colors.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_second/api/user.dart';
 
 class FilteredResultPageScreen extends StatelessWidget {
   FilteredResultPageScreen(
@@ -92,8 +93,6 @@ class FilteredResultsPage extends StatelessWidget {
   }
 }
 
-// You will need to create a ProductDetailPage widget that takes a Produit as an argument.
-
 class ProductDetailPageScreen extends StatelessWidget {
   final produit;
 
@@ -115,11 +114,8 @@ class ProductDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var produitController =
         Provider.of<ProduitControllerTest>(context, listen: false);
-    print(
-        "identifiant unique dans mon productDetial => ${identityHashCode(produitController)}");
-    List imageUrls = produit.images
-        .map((img) => img.url)
-        .toList(); // Assurez-vous que les URLs sont bien des String
+
+    List imageUrls = produit.images.map((img) => img.url).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -129,11 +125,10 @@ class ProductDetailPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Carousel for product images
             CarouselSlider(
               options: CarouselOptions(
-                height: 300, // Set height of the carousel
-                autoPlay: false, // Disable autoPlay
+                height: 300,
+                autoPlay: false,
                 enlargeCenterPage: true,
                 enableInfiniteScroll: true,
                 viewportFraction: 1.0,
@@ -154,45 +149,37 @@ class ProductDetailPage extends StatelessWidget {
                     produit.nom,
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     child: Text(
                       '${produit.prix} €',
                       style: TextStyle(
-                        color: Colors.black, // Couleur du texte
-                        fontSize: 16, // Taille du texte
-                        fontWeight: FontWeight.bold, // Épaisseur du texte
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-
                   SizedBox(height: 10),
                   Text(
                     produit.description,
                     style: TextStyle(fontSize: 16, fontFamily: 'NotosansLight'),
                   ),
                   SizedBox(height: 20),
-                  // Button for adding to cart
                   ElevatedButton(
                     onPressed: () {
-                      // Add your functionality for adding to cart here
-                      print('avant l envoi de produit');
-                      print(produit.nom);
-                      produitController.addItem(
-                          produit); // Add the product to the cart (assuming addItem is a method in ProduitController
-                      print('Added to cart');
+                      ajouterProduitPanier(produit.id, 100);
+
+                      produitController.addItem(produit);
                     },
                     child: Text('AJOUTER AU PANIER'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorsApp.primaryColor, // Button color
+                      backgroundColor: ColorsApp.primaryColor,
                       foregroundColor: ColorsApp.textColor,
-                      // Text color
                     ).copyWith(
                       textStyle: MaterialStateProperty.all<TextStyle>(
                         TextStyle(
-                          fontFamily:
-                              'NotosansRegular', // Utilisation de la famille de polices personnalisée
+                          fontFamily: 'NotosansRegular',
                         ),
                       ),
                     ),
@@ -202,11 +189,10 @@ class ProductDetailPage extends StatelessWidget {
                     'Produits Similaires',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  // Carousel for similar products (manual control)
                   CarouselSlider(
                     options: CarouselOptions(
                       height: 180,
-                      autoPlay: false, // Disable autoPlay
+                      autoPlay: false,
                       enlargeCenterPage: true,
                       viewportFraction: 0.8,
                     ),

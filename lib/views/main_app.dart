@@ -3,6 +3,7 @@ import 'package:flutter_second/controllers/item_card_controller.dart';
 import 'package:flutter_second/controllers/adresse_controller.dart';
 import 'package:flutter_second/controllers/produit_controller.dart';
 import 'package:flutter_second/provider/auth_provider.dart';
+import 'package:flutter_second/controllers/produits.dart';
 import 'package:flutter_second/views/components/navbar.dart';
 import 'package:provider/provider.dart';
 import 'dart:core'; 
@@ -19,6 +20,8 @@ class MainApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => AuthProvider()),
           ChangeNotifierProvider(create: (context) => ProduitControllerTest()),
           ChangeNotifierProvider(create: (context) => AdresseController()),
+          ChangeNotifierProvider(create: (context) => listeProduits()),
+          
         ],
         child: MaterialApp(
           title: appTitle,

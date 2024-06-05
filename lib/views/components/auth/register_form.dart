@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_second/api/user.dart';
 import 'package:flutter_second/views/components/auth/profil_screen.dart';
+import 'package:flutter_second/utils/secure_storage.dart';
 
 class RegisterForm extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class _RegisterFormState extends State<RegisterForm> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final EncryptionService encryptionService = EncryptionService();
   bool _agreeToTerms = false;
   @override
   void dispose() {
@@ -33,13 +35,14 @@ class _RegisterFormState extends State<RegisterForm> {
         builder: (context) => const Center(child: CircularProgressIndicator()),
       );
       try {
+        // final encryptedPassword = encryptionService.encryptText(_passwordController.text);
         print(
-            "${_firstNameController.text}, ${_lastNameController.text},${_emailController.text},${_passwordController.text} ");
+            "${_firstNameController.text}, ${_lastNameController.text},${_emailController.text},${_passwordController} ");
         int result = await registerUser(
           _firstNameController.text,
           _lastNameController.text,
           _emailController.text,
-          _passwordController.text,
+        _passwordController.text,
         );
         Navigator.of(context).pop();
         if (result == 200) {

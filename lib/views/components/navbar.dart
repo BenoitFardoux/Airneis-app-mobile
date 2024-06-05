@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_second/models/user_model.dart';
 import 'package:flutter_second/views/components/auth/profil_screen.dart';
 import 'package:flutter_second/views/homepage.dart';
 import './../../../colors/colors.dart';
@@ -41,7 +42,7 @@ class NavBar_Icons_Title extends StatelessWidget
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PanierManageScreen()),
+              MaterialPageRoute(builder: (context) => PanierManage()),
             );
           },
         ),

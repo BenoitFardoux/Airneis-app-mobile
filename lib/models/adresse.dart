@@ -14,16 +14,16 @@ class Adresse{
 
   factory Adresse.fromJson(Map<String, dynamic> json) {
     return Adresse(
-      id: json['id'],
-      numeroDeRue: json['numeroDeRue'],
-      informations: json['informations'],
-      ville: json['ville'],
-      pays: json['pays'],
-      telephone: json['telephone'],
-      prenom: json['prenom'],
-      nom: json['nom'],
-      departement: json['departement'],
-      codePostal: json['codePostal']
+      id: json['id'] ?? 'par défaut',
+      numeroDeRue: json['numeroDeRue']?? 'par défaut',
+      informations: json['informations']?? 'par défaut',
+      ville: json['ville']?? 'par défaut',
+      pays: json['pays']?? 'par défaut',
+      telephone: json['telephone']?? 'par défaut',
+      prenom: json['prenom']?? 'par défaut',
+      nom: json['nom']?? 'par défaut',
+      departement: json['departement']?? 'par défaut',
+      codePostal: json['codePostal']?? 'par défaut'
     );
   }
 

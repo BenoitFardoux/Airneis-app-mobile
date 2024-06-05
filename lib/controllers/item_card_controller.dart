@@ -14,7 +14,7 @@ class ItemCardController extends ChangeNotifier {
   void fetchAndInitializeItems() async {
     try {
       var data = await informationsUtilisateurAPI();
-      _items = data.paiements!;
+      // _items = data.paiements!;
       notifyListeners();
     } catch (e) {
       print('Error fetching data: $e');

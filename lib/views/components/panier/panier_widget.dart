@@ -1,89 +1,135 @@
+import 'dart:js_interop_unsafe';
+import 'package:flutter_second/colors/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import './panier_manage.dart';
+import 'package:flutter_second/api/user.dart';
 
 class PanierWidget extends StatelessWidget {
   final String titre;
   final String description;
   final String image;
   final double price;
+  final int quantity;
   final String id;
+    final Function(int) onQuantityChanged; 
+    final Function onDelete;// Le callback pour la quantité
 
-  PanierWidget(
-      {super.key,
-      required this.id,
-      required this.titre,
-      required this.description,
-      required this.image,
-      required this.price});
+  PanierWidget({
+    super.key,
+    required this.id,
+    required this.titre,
+    required this.description,
+    required this.image,
+    required this.price,
+    this.quantity =
+        1, 
+        required this.onQuantityChanged,// Supposons une quantité par défaut de 1 si non spécifiée
+        required this.onDelete,
+  });
+
+  
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 10),
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.network(
-            image,
-            width: 100,
-            height: 100,
-            fit: BoxFit.cover,
-          ),
-          SizedBox(width: 10),
-          Expanded(
-            child: Column(
+
+
+    return Card(
+      // color: Colors.blueGrey.shade200,
+      elevation: 5.0,
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Image.network(
+              image,
+              width: 100,
+              height: 100,
+              fit: BoxFit.cover,
+            ),
+
+            SizedBox(
+              height: 100,
+              width: 130,
+            child:
+            Column( 
+
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   titre,
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
                 ),
-                SizedBox(height: 4),
                 Text(
                   description,
-                  style: TextStyle(fontSize: 14),
-                  overflow: TextOverflow.fade,
-                  softWrap: true,
+                  style: TextStyle(
+                    fontSize: 9,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
               ],
             ),
-          ),
-          Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+
+            SizedBox( 
+              height: 100,
+              
+              child:
+            
+            Column(
               crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  '$price €',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Container(
-                  width: 20,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Quantité',
+                 Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: ColorsApp.priceColor,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text('${price.toString()} €'),
+                        ),
+                        SizedBox(height: 10),
+           SizedBox(
+                    width: 50,
+                    height: 30,
+                    child: TextFormField(
+                      initialValue: quantity.toString(),
+                      decoration: InputDecoration(
+                        labelText: 'Quantité',
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                      onFieldSubmitted: (value) {
+                        int newQuantity = int.tryParse(value) ?? quantity;
+                        onQuantityChanged(newQuantity);
+                      },
                     ),
                   ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () {
-                    print("supprimer le produit  ${id}");
-                  },
-                ),
-              ]),
-        ],
+            SizedBox(
+              width: 30,
+              height: 30,
+              child:
+            
+            IconButton(
+               
+                onPressed: () {
+                  //  saveData(index);
+                  deleteProduitPanier(id);
+                  onDelete();
+                },
+                icon: Icon(Icons.delete),
+                
+            ),),
+              ],
+            ),),
+          ],
+        ),
       ),
     );
   }

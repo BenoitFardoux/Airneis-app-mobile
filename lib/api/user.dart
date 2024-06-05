@@ -36,7 +36,6 @@ Future<int> registerUser(
 }
 
 Future<http.Response> login(String email, String password) async {
-  print("${IPConfig.getIP()}api/auth/login");
   final url = Uri.parse("${IPConfig.getIP()}api/auth/login");
 
   final headers = {
@@ -46,12 +45,7 @@ Future<http.Response> login(String email, String password) async {
 
   var body = jsonEncode({"email": email, "motDePasse": password});
 
-  print('email => $email et password => $password');
-
   final response = await http.post(url, headers: headers, body: body);
-  print('response => ${response.body}');
-  print('status code => ${response.statusCode}');
-  print('reason => ${response.reasonPhrase}');
 
   if (response.statusCode == 200) {
     return response;
@@ -60,9 +54,7 @@ Future<http.Response> login(String email, String password) async {
   }
 }
 
-
 Future<UserModel> informationsUtilisateurAPI() async {
-
   final url = Uri.parse('${IPConfig.getIP()}api/utilisateur/me');
   var secureStorage = SecureStorage();
   String? token = await secureStorage.readToken();
@@ -71,13 +63,12 @@ Future<UserModel> informationsUtilisateurAPI() async {
     'Accept': 'application/json',
     'Authorization': 'Bearer $token',
   };
- 
+
   final response = await http.get(url, headers: headers);
-  print(response);
-  print(response.statusCode);
+
   if (response.statusCode == 200) {
     var jsonData = jsonDecode(response.body) as Map<String, dynamic>;
-    
+
     UserModel users = UserModel.fromJson(jsonData);
 
     return users;
@@ -85,7 +76,6 @@ Future<UserModel> informationsUtilisateurAPI() async {
     throw Exception('Failed to load user data');
   }
 }
-
 
 Future<UserModel> recupererPanier() async {
   final url = Uri.parse('${IPConfig.getIP()}api/utilisateur/me');
@@ -109,15 +99,9 @@ Future<UserModel> recupererPanier() async {
   }
 }
 
-
-
-
-
-
-
 Future<UserModel> ajouterProduitPanier(String id, int quantite) async {
-  print('dans le add panier');
-  final url = Uri.parse('${IPConfig.getIP()}api/utilisateur/panier?quantite=$quantite&idArticle=$id');
+  final url = Uri.parse(
+      '${IPConfig.getIP()}api/utilisateur/panier?quantite=$quantite&idArticle=$id');
   var secureStorage = SecureStorage();
   String? token = await secureStorage.readToken();
   final headers = {
@@ -125,25 +109,23 @@ Future<UserModel> ajouterProduitPanier(String id, int quantite) async {
     'Accept': 'application/json',
     'Authorization': 'Bearer $token',
   };
-  
-print('url => $url');
+
   final response = await http.put(url, headers: headers);
-  print("Response body: ${response.body}");
+
   if (response.statusCode == 200) {
     var jsonData = jsonDecode(response.body) as Map<String, dynamic>;
 
     UserModel users = UserModel.fromJson(jsonData);
-    print("put de panier réussi"); 
+
     return users;
   } else {
     throw Exception('Failed to load user data');
   }
 }
-
 
 Future<UserModel> deleteProduitPanier(String idArticle) async {
-  print('dans le add panier');
-  final url = Uri.parse('${IPConfig.getIP()}api/utilisateur/panier/article/$idArticle');
+  final url =
+      Uri.parse('${IPConfig.getIP()}api/utilisateur/panier/article/$idArticle');
   var secureStorage = SecureStorage();
   String? token = await secureStorage.readToken();
   final headers = {
@@ -151,19 +133,16 @@ Future<UserModel> deleteProduitPanier(String idArticle) async {
     'Accept': 'application/json',
     'Authorization': 'Bearer $token',
   };
-  
-print('url => $url');
+
   final response = await http.delete(url, headers: headers);
-  print("Response body: ${response.body}");
+
   if (response.statusCode == 200) {
     var jsonData = jsonDecode(response.body) as Map<String, dynamic>;
 
     UserModel users = UserModel.fromJson(jsonData);
-    print("put de panier réussi"); 
+
     return users;
   } else {
     throw Exception('Failed to load user data');
   }
 }
-
-

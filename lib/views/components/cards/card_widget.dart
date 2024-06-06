@@ -29,17 +29,17 @@ class CardWidget extends StatelessWidget {
             color: Color(0xFF1234CB),
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-                color: card.isFavorite ? Colors.green : Colors.grey, width: 2),
+                color: card.estParDefaut ? Colors.green : Colors.grey, width: 2),
           ),
           child: Column(
-            crossAxisAlignment: card.isFavorite
+            crossAxisAlignment: card.estParDefaut
                 ? CrossAxisAlignment.start
                 : CrossAxisAlignment.start,
-            mainAxisAlignment: card.isFavorite
+            mainAxisAlignment: card.estParDefaut
                 ? MainAxisAlignment.spaceBetween
                 : MainAxisAlignment.spaceBetween,
             children: [
-              if (card.isFavorite)
+              if (card.estParDefaut)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -70,9 +70,9 @@ class CardWidget extends StatelessWidget {
                 ),
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text(
-                    '**** **** **** ${card.numero.substring(card.numero.length - 4)}',
+                    '**** **** **** ${card.numeroCarte.substring(card.numeroCarte.length - 4)}',
                     style: TextStyle(fontSize: 18, color: Colors.white)),
-                Text(card.nom,
+                Text(card.nomCarte,
                     style: TextStyle(fontSize: 16, color: Colors.white)),
               ]),
             ],

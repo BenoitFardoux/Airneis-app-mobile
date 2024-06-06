@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../models/produit.dart';
-import 'package:flutter_second/api/produit.dart';
 
 class ProduitControllerTest extends ChangeNotifier {
   List _produits = [];
@@ -22,4 +21,3 @@ class ProduitControllerTest extends ChangeNotifier {
     return _produits.length;
   }
 }
-

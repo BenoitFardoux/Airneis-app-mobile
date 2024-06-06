@@ -101,16 +101,13 @@ Future<UserModel> recupererPanier() async {
 
 Future<UserModel> ajouterProduitPanier(String id, int quantite) async {
   final url = Uri.parse(
-      '${IPConfig.getIP()}api/utilisateur/panier?quantite=$quantite&idArticle=$id');
+      '${IPConfig.getIP()}api/utilisateur/panier?idArticle=$id&quantite=$quantite');
+
   var secureStorage = SecureStorage();
   String? token = await secureStorage.readToken();
-  final headers = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Authorization': 'Bearer $token',
-  };
 
-  final response = await http.put(url, headers: headers);
+  final response =
+      await http.put(url, headers: {'Authorization': 'Bearer $token'});
 
   if (response.statusCode == 200) {
     var jsonData = jsonDecode(response.body) as Map<String, dynamic>;
@@ -123,7 +120,7 @@ Future<UserModel> ajouterProduitPanier(String id, int quantite) async {
   }
 }
 
-Future<UserModel> deleteProduitPanier(String idArticle) async {
+Future deleteProduitPanier(String idArticle) async {
   final url =
       Uri.parse('${IPConfig.getIP()}api/utilisateur/panier/article/$idArticle');
   var secureStorage = SecureStorage();
@@ -135,6 +132,57 @@ Future<UserModel> deleteProduitPanier(String idArticle) async {
   };
 
   final response = await http.delete(url, headers: headers);
+}
+
+Future<UserModel> patchProduitPanier({
+  required String id,
+  required int quantite,
+  String adresse = "string",
+  String codePostal = "string",
+  String numeroDeRue = "string",
+  String informations = "string",
+  String ville = "string",
+  String pays = "string",
+  String telephone = "string",
+  String prenom = "string",
+  String nom = "string",
+}) async {
+  final url = Uri.parse('${IPConfig.getIP()}api/utilisateur/panier');
+  var secureStorage = SecureStorage();
+  String? token = await secureStorage.readToken();
+  final headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': 'Bearer $token',
+  };
+
+  var body = jsonEncode({
+    "produits": [
+      {"id": "$id", "quantite": quantite}
+    ],
+    "adresse": {
+      "codePostal": "string",
+      "numeroDeRue": "string",
+      "informations": "string",
+      "ville": "string",
+      "pays": "string",
+      "telephone": "string",
+      "prenom": "string",
+      "nom": "string",
+      "departement": "string"
+    },
+    "paiements": {
+      "numeroCarte": "string",
+      "dateExpiration": "string",
+      "codeSecurite": "string",
+      "nomCarte": "string",
+      "estParDefaut": true
+    },
+    "dateDeCommande": "2024-06-05T07:35:19.838Z",
+    "dateDeLivraison": "2024-06-05T07:35:19.838Z"
+  });
+
+  final response = await http.patch(url, headers: headers, body: body);
 
   if (response.statusCode == 200) {
     var jsonData = jsonDecode(response.body) as Map<String, dynamic>;

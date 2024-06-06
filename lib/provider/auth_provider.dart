@@ -8,7 +8,7 @@ class AuthProvider with ChangeNotifier {
   void login() {
     _isLoggedIn = true;
     notifyListeners();
-    print('dans le login de notifier');
+    
   }
 
   void logout() {

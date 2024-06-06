@@ -5,6 +5,8 @@ import 'package:flutter_second/views/main_app.dart';
 import './../colors/colors.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_second/api/user.dart';
+import 'package:flutter_second/utils/secure_storage.dart';
+import 'package:flutter_second/views/components/auth/login_screen.dart';
 
 class FilteredResultPageScreen extends StatelessWidget {
   FilteredResultPageScreen(
@@ -118,6 +120,7 @@ class ProductDetailPage extends StatelessWidget {
     List imageUrls = produit.images.map((img) => img.url).toList();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(produit.nom),
       ),
@@ -167,10 +170,19 @@ class ProductDetailPage extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {
-                      ajouterProduitPanier(produit.id, 100);
+                    onPressed: () async {
+                      String? token = await SecureStorage().readToken();
+                      if (token == null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()),
+                        );
+                      } else {
+                        ajouterProduitPanier(produit.id, 1);
 
-                      produitController.addItem(produit);
+                        produitController.addItem(produit);
+                      }
                     },
                     child: Text('AJOUTER AU PANIER'),
                     style: ElevatedButton.styleFrom(
@@ -189,37 +201,66 @@ class ProductDetailPage extends StatelessWidget {
                     'Produits Similaires',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  CarouselSlider(
-                    options: CarouselOptions(
-                      height: 180,
-                      autoPlay: false,
-                      enlargeCenterPage: true,
-                      viewportFraction: 0.8,
-                    ),
-                    items: [1, 2, 3, 4].map((i) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.symmetric(horizontal: 5.0),
-                            decoration: BoxDecoration(
-                              color: Colors.amber,
-                            ),
-                            child: Text(
-                              'Text $i',
-                              style: TextStyle(fontSize: 16.0),
-                            ),
-                          );
-                        },
-                      );
-                    }).toList(),
-                  ),
+                  ImageCarousel(imageUrls: imageUrls),
                 ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class ImageCarousel extends StatelessWidget {
+  final List imageUrls;
+
+  ImageCarousel({Key? key, required this.imageUrls}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: 180,
+        autoPlay: true,
+        enlargeCenterPage: true,
+        viewportFraction: 0.8,
+      ),
+      items: imageUrls.map((url) {
+        return Builder(
+          builder: (BuildContext context) {
+            return Container(
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.symmetric(horizontal: 5.0),
+              decoration: BoxDecoration(
+                color: Colors.amber,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  url,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Center(child: Text('Image not available'));
+                  },
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                (loadingProgress.expectedTotalBytes ?? 1)
+                            : null,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
+          },
+        );
+      }).toList(),
     );
   }
 }

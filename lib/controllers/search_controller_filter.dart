@@ -4,6 +4,9 @@ import './../api/produit.dart';
 class SearchControllerFilter extends ChangeNotifier {
   List articles = [];
   List filteredArticles = [];
+  List Categorie = [];
+
+
   TextEditingController searchController = TextEditingController();
 
   RangeValues? priceRange = RangeValues(0, 10000);
@@ -20,6 +23,7 @@ class SearchControllerFilter extends ChangeNotifier {
     searchController.addListener(() {
       filterArticles();
     });
+    
   }
 
   Future<void> retrieveProduits() async {
@@ -50,16 +54,17 @@ class SearchControllerFilter extends ChangeNotifier {
           article.dimension.largeur <= widthRange.end &&
           article.dimension.profondeur >= depthRange.start &&
           article.dimension.profondeur <= depthRange.end;
-      // bool matchesStock = !inStockOnly || (inStockOnly && article.inStock);
+ 
 
       return matchesText &&
           matchesPrice &&
           matchesMaterials &&
           matchesCategories &&
-          matchesDimensions; // && matchesStock;
+          matchesDimensions; 
     }).toList();
     notifyListeners();
   }
+  
 
   void updateFilters({
     RangeValues? newPriceRange,

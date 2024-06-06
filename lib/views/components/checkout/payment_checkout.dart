@@ -16,8 +16,8 @@ class _CheckoutWidgetState extends State<PaymentCheckoutWidget> {
   CardItem? selectedCard;
 
   @override
-  Widget build(BuildContext context) {
-    var providerName = Provider.of<ItemCardController>(context, listen: false);
+Widget build(BuildContext context) {
+    var providerName = Provider.of<ItemCardController>(context, listen: true);    
 
     return SingleChildScrollView(
       child: Column(
@@ -28,22 +28,24 @@ class _CheckoutWidgetState extends State<PaymentCheckoutWidget> {
               Navigator.pop(context);
             },
           ),
-          GenericDropdown<CardItem>(
-            items: providerName.items,
-            getDisplayValue: (CardItem card) => card.nom,
-            onSelected: (CardItem card) {
-              setState(() {
-                selectedCard = card;
-              });
-            },
-            selectedValue: providerName.items.first,
-          ),
-          if (selectedCard != null)
-            AddCardPaymentCheckout(card: selectedCard)
-          else
-            AddCardPaymentCheckout()
+          providerName.items.isNotEmpty 
+            ? GenericDropdown<CardItem>(
+                items: providerName.items,
+                getDisplayValue: (CardItem card) => card.nomCarte,
+                onSelected: (CardItem card) {
+                  setState(() {
+                    selectedCard = card;
+                  });
+                },
+                selectedValue: providerName.items.first,
+              )
+            : Text("No cards available"),
+          selectedCard != null
+            ? AddCardPaymentCheckout(card: selectedCard)
+            : AddCardPaymentCheckout(),
         ],
       ),
     );
   }
+
 }

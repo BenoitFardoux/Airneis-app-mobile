@@ -1,27 +1,35 @@
 class CardItem {
-  final String numero;
-  final String nom;
-  final String Month; 
-  final String Year; 
-   String dateExpiration;
-   String codeSecurite; 
-  bool isFavorite;
+  final String numeroCarte;
+  String dateExpiration;
+  String codeSecurite;
+  final String nomCarte;
 
+  bool estParDefaut;
 
-
-  CardItem({required this.numero, required this.nom, required this.Month, required this.Year,  this.dateExpiration = "par défaut",  this.codeSecurite = "par défaut", this.isFavorite = false});          
-
+  CardItem(
+      {required this.numeroCarte,
+      required this.nomCarte,
+      this.dateExpiration = "par défaut",
+      this.codeSecurite = "par défaut",
+      this.estParDefaut = false});
 
   factory CardItem.fromJson(Map<String, dynamic> json) {
-    
     return CardItem(
-      numero: json['numeroCarte'] ,
-      nom: json['nomCarte'] ,
-      Month: json['Month'],
-      Year: json['Year'],
-      dateExpiration: json['dateExpiration'],
-      codeSecurite: json['codeSecurite'],
-      isFavorite: json['isFavorite'],
+      numeroCarte: json['numeroCarte'] ?? "par défaut",
+      nomCarte: json['nomCarte'] ?? "par défaut",
+      dateExpiration: json['dateExpiration'] ?? "par défaut",
+      codeSecurite: json['codeSecurite'] ?? "par défaut",
+      estParDefaut: json['estParDefaut'] ?? false,
     );
-  }                      
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'numeroCarte': numeroCarte,
+      'dateExpiration': dateExpiration,
+      'codeSecurite': codeSecurite,
+      'nomCarte': nomCarte,
+      'estParDefaut': estParDefaut,
+    };
+  }
 }

@@ -36,8 +36,7 @@ class _RegisterFormState extends State<RegisterForm> {
       );
       try {
         // final encryptedPassword = encryptionService.encryptText(_passwordController.text);
-        print(
-            "${_firstNameController.text}, ${_lastNameController.text},${_emailController.text},${_passwordController} ");
+        
         int result = await registerUser(
           _firstNameController.text,
           _lastNameController.text,

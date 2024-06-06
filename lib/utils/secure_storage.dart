@@ -15,7 +15,12 @@ class SecureStorage {
   }
 
   Future<void> saveToken(String token) async {
+    try {
     await _storage.write(key: _keyToken, value: token);
+    
+  } catch (e) {
+    print("Erreur lors de l'enregistrement du token: $e");
+  }
   }
 
   Future<Map<String, String?>> readCredentials() async {
@@ -28,7 +33,16 @@ class SecureStorage {
   }
 
   Future<String?> readToken() async {
-    return await _storage.read(key: _keyToken);
+   try {
+    String? token = await _storage.read(key: _keyToken);
+    if (token == null) {     
+      return null; 
+    } 
+    return token;
+  } catch (e) {
+    print("Erreur lors de la lecture du token: $e");
+    return null;
+  }
   }
 
   Future<void> deleteCredentials() async {

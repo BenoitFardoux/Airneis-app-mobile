@@ -42,12 +42,12 @@ class _LoginFormState extends State<LoginForm> {
   try {
     // final encryptedPassword = encryptionService.encryptText(_passwordController.text);
     final plainPassword = _passwordController.text;
-  print("value de encryptedPassword => $plainPassword");
+  
     final response = await login(_emailController.text, plainPassword);
     final responseData = json.decode(response.body);
 
     await secureStorage.saveCredentials(_emailController.text, plainPassword);
-    print("Valeur de response[data] ${responseData['token']}");
+   
     await secureStorage.saveToken(responseData['token']);
 
     Provider.of<AuthProvider>(context, listen: false).login();

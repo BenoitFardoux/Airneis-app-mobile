@@ -24,23 +24,24 @@ class Produit {
       id: json['id'] ?? 'par défaut',
       nom: json['nom'] ?? 'par défaut',
       description: json['description'] ?? 'par défaut',
-      prix: json['prix'].toDouble(),
-      dimension: Dimension.fromJson(json['dimension']  ?? {}),
-      categorie: Categorie.fromJson(json['categorie'] ?? {}),
-      images: List<ImageProduit>.from(json['images'].map((x) => ImageProduit.fromJson(x))),
-      materiaux: List<Materiau>.from(json['materiaux'].map((x) => Materiau.fromJson(x))),
+      prix: (json['prix'] ?? 0).toDouble(),
+      dimension: Dimension.fromJson(json['dimension'] ?? {}),
+      categorie: Categorie.fromJson(json['categorie'] ?? {}),     
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => ImageProduit.fromJson(e))
+              .toList() ??
+          [],
+      materiaux: json['materiaux'] != null
+          ? List<Materiau>.from(json['materiaux'].map((x) => Materiau.fromJson(x)))
+          : [],
     );
   }
-
 
   @override 
   String toString() {
     return 'Produit : {id: $id, nom: $nom, description: $description, prix: $prix, dimension: $dimension, categorie: $categorie, images: $images, materiaux: $materiaux}';
   }
 }
-
-//TO DO : trouver ce qui provoque le Exception during request: TypeError: null: type 'Null' is not a subtype of type 'String'
-//TO DO : qui n'apparait pas quand on met les valeurs par défaut à l'aide de "??"
 
 class Dimension {
   final double hauteur;
@@ -52,9 +53,9 @@ class Dimension {
 
   factory Dimension.fromJson(Map<String, dynamic> json) {
     return Dimension(
-      hauteur: json['hauteur'] ?? 0.0,
-      largeur: json['largeur'] ?? 0.0,
-      profondeur: json['profondeur'] ?? 0.0,
+      hauteur: (json['hauteur'] ?? 0).toDouble(),
+      largeur: (json['largeur'] ?? 0).toDouble(),
+      profondeur: (json['profondeur'] ?? 0).toDouble(),
     );
   }
 }
@@ -67,7 +68,7 @@ class Categorie {
 
   factory Categorie.fromJson(Map<String, dynamic> json) {
     return Categorie(
-      id: json['id'] ?? 'par défaut', 
+      id: json['id'] ?? 'par défaut',
       nom: json['nom'] ?? 'par défaut',
     );
   }

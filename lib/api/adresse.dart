@@ -19,8 +19,8 @@ Future addAdresseAPI(Map<String, dynamic> adresse) async {
     body: jsonEncode(adresse),
   );
 
-  if (response.statusCode == 200) {
-  } else {
-    throw Exception('Failed to load user data');
-  }
+  // if (response.statusCode == 200) {
+  // } else {
+  //   throw Exception('Failed to load user data');
+  // }
 }

@@ -64,11 +64,11 @@ class ItemCardController extends ChangeNotifier {
 
     final response = await http.patch(url, headers: headers, body: body);
 
-    if (response.statusCode == 200) {
-      print('Cartes mises à jour avec succès');
-    } else {
-      print('Erreur lors de la mise à jour des cartes: ${response.statusCode}');
-      throw Exception('Failed to update cartes');
-    }
+    // if (response.statusCode == 200) {
+    //   print('Cartes mises à jour avec succès');
+    // } else {
+    //   print('Erreur lors de la mise à jour des cartes: ${response.statusCode}');
+    //   throw Exception('Failed to update cartes');
+    // }
   }
 }

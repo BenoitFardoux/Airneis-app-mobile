@@ -1,28 +1,26 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import './../models/adresse.dart';
 import './../assets/ip/ip.dart';
+import './../utils/secure_storage.dart';
 
-Future<List<Adresse>> getProduit() async {
-  var url = Uri.parse(
-      '${IPConfig.getIP()}api/airneis/produits?pageNumber=0&pageSize=10');
+Future addAdresseAPI(Map<String, dynamic> adresse) async {
+  var url = Uri.parse('${IPConfig.getIP()}api/utilisateur/adresse');
+  var secureStorage = SecureStorage();
+  String? token = await secureStorage.readToken();
+  final headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': 'Bearer $token',
+  };
 
-  try {
-    var response = await http.get(url);
+  final response = await http.post(
+    url,
+    headers: headers,
+    body: jsonEncode(adresse),
+  );
 
-    if (response.statusCode == 200) {
-      var decodedBody = utf8.decode(response.bodyBytes);
-      var data = jsonDecode(decodedBody)['_embedded'];
-      List<Adresse> produits = List<Adresse>.from(
-          data['produitRestRessourceList'].map((x) => Adresse.fromJson(x)));
-      return produits;
-    } else {
-      print(
-          "Request failed: Status code ${response.statusCode}, Response: ${response.body}");
-      return [];
-    }
-  } catch (e) {
-    print("Exception during request: $e");
-    return [];
-  }
+  // if (response.statusCode == 200) {
+  // } else {
+  //   throw Exception('Failed to load user data');
+  // }
 }

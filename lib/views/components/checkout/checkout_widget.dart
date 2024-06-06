@@ -38,16 +38,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                 Navigator.pop(context);
               },
             ),
-            GenericDropdown<Adresse>(
-              items: providerName.items,
-              getDisplayValue: (Adresse adresse) => adresse.informations,
-              onSelected: (Adresse adresse) {
-                setState(() {
-                  selectedAdresse = adresse;
-                });
-              },
-              selectedValue: providerName.items.first,
-            ),
+            providerName.items.isNotEmpty
+                ? GenericDropdown<Adresse>(
+                    items: providerName.items,
+                    getDisplayValue: (Adresse adresse) => adresse.informations,
+                    onSelected: (Adresse adresse) {
+                      setState(() {
+                        selectedAdresse = adresse;
+                      });
+                    },
+                    selectedValue: providerName.items.first,
+                  )
+                : Text("Aucune adresse disponible"),
             selectedAdresse != null
                 ? AddAdressCheckout(adresse: selectedAdresse)
                 : AddAdressCheckout(),

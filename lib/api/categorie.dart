@@ -1,9 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import './../models/adresse.dart';
+import './../models/categorie.dart';
 import './../assets/ip/ip.dart';
 
-Future<List<Adresse>> getProduit() async {
+Future<List<Adresse>> getProduitCategorie() async {
   var url = Uri.parse(
       '${IPConfig.getIP()}api/airneis/produits?pageNumber=0&pageSize=10');
 
@@ -18,8 +19,7 @@ Future<List<Adresse>> getProduit() async {
           data['produitRestRessourceList'].map((x) => Adresse.fromJson(x)));
       return produits;
     } else {
-      print(
-          "Request failed: Status code ${response.statusCode}, Response: ${response.body}");
+      
       return [];
     }
   } catch (e) {
@@ -27,3 +27,25 @@ Future<List<Adresse>> getProduit() async {
     return [];
   }
 }
+
+
+
+
+
+
+  Future<Category> fetchCategory(String id) async {
+  var url = Uri.parse('${IPConfig.getIP()}api/airneis/categorie/$id');
+  
+  
+    var response = await  http.get(url);
+
+    if (response.statusCode == 200) {
+     var categorie = await Category.fromJson(json.decode(response.body));  
+      return Category.fromJson(json.decode(response.body));
+
+      
+    } else {
+      throw Exception('Failed to load category');
+    }
+  }
+

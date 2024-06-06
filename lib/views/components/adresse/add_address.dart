@@ -1,149 +1,143 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../controllers/adresse_controller.dart';
 import '../../../models/adresse.dart';
-import 'manage_adresse.dart';
+import './../../../api/adresse.dart';
+import './../../../controllers/adresse_controller.dart';
+import './manage_adresse.dart';
 
 class AddAdress extends StatelessWidget {
+  final Adresse? adresse;
+
+  const AddAdress({Key? key, this.adresse}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: AddAdressLess(),
+      height: 900,
+      width: double.infinity,
+      child: AddAdressLess(adresse: adresse),
     );
   }
 }
 
 class AddAdressLess extends StatelessWidget {
-  AddAdressLess({super.key});
-  final TextEditingController codePostal = TextEditingController();
-  final TextEditingController numeroDeRue = TextEditingController();
-  final TextEditingController informations = TextEditingController();
-  final TextEditingController ville = TextEditingController();
-  final TextEditingController pays = TextEditingController();
-  final TextEditingController telephone = TextEditingController();
-  final TextEditingController prenom = TextEditingController();
-  final TextEditingController nom = TextEditingController();
-  final TextEditingController departement = TextEditingController();
+  final Adresse? adresse;
+
+  AddAdressLess({Key? key, this.adresse}) : super(key: key);
+
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _prenomController = TextEditingController();
+  final TextEditingController _numeroCarteController = TextEditingController();
+  final TextEditingController _nomController = TextEditingController();
+  final TextEditingController _informationsController = TextEditingController();
+  final TextEditingController _villeController = TextEditingController();
+  final TextEditingController _codePostalController = TextEditingController();
+  final TextEditingController _departementController = TextEditingController();
+  final TextEditingController _paysController = TextEditingController();
+  final TextEditingController _telephoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    var providerName = Provider.of<AdresseController>(context, listen: false);
-    return ChangeNotifierProvider(
-      create: (_) => AdresseController(),
-      child: MaterialApp(
-        theme: ThemeData(useMaterial3: true),
-        home: Scaffold(
-          appBar: AppBar(title: const Text('InputDecoration.label Sample')),
-          body: Container(
-            padding: EdgeInsets.symmetric(horizontal: 50),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextFieldCard(
-                    controller: prenom, label: 'Prénom', placeHolder: 'Prénom'),
-                SizedBox(height: 10),
-                TextFieldCard(
-                    controller: nom, label: 'Nom', placeHolder: 'Nom'),
-                SizedBox(height: 10),
-                TextFieldCard(
-                    controller: informations,
-                    label: 'Informations',
-                    placeHolder: 'Informations'),
-                SizedBox(height: 10),
-                TextFieldCard(
-                    controller: ville, label: 'Ville', placeHolder: 'Ville'),
-                SizedBox(height: 10),
-                TextFieldCard(
-                    controller: codePostal,
-                    label: 'Code Postal',
-                    placeHolder: 'Code Postal'),
-                SizedBox(height: 10),
-                TextFieldCard(
-                    controller: departement,
-                    label: 'Département',
-                    placeHolder: 'Département'),
-                SizedBox(height: 10),
-                TextFieldCard(
-                    controller: pays, label: 'Pays', placeHolder: 'Pays'),
-                SizedBox(height: 10),
-                TextFieldCard(
-                    controller: telephone,
-                    label: 'Téléphone',
-                    placeHolder: 'Téléphone'),
-                ElevatedButton(
-                  onPressed: () {
-                    final prenomController = prenom.text;
-                    final nomController = nom.text;
-                    final informationsController = informations.text;
-                    final villeController = ville.text;
-                    final codePostalController = codePostal.text;
-                    final departementController = departement.text;
-                    final paysController = pays.text;
-                    final telephoneController = ville.text;
+    final provider = Provider.of<AdresseController>(context, listen: false);
 
-                    // var favorite = false;
-                    print("prenom: $prenom, telephone: $telephone");
+    _prenomController.text = adresse?.prenom ?? '';
+    _nomController.text = adresse?.nom ?? '';
+    _numeroCarteController.text = adresse?.numeroDeRue ?? '';
+    _informationsController.text = adresse?.informations ?? '';
+    _villeController.text = adresse?.ville ?? '';
+    _codePostalController.text = adresse?.codePostal ?? '';
+    _departementController.text = adresse?.departement ?? '';
+    _paysController.text = adresse?.pays ?? '';
+    _telephoneController.text = adresse?.telephone ?? '';
 
-                    Adresse adresse = Adresse(
-                        id: "1",
-                        numeroDeRue: "10",
-                        prenom: prenomController,
-                        nom: nomController,
-                        informations: informationsController,
-                        ville: villeController,
-                        codePostal: codePostalController,
-                        departement: departementController,
-                        pays: paysController,
-                        telephone: telephoneController);
+    return 
+    
+    
+    Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text('Ajouter une adresse'),
+      ),
+      body: 
 
-                    providerName.addItem(adresse);
+    SingleChildScrollView( 
 
-                    print('Nouvelle adresse ajoutée');
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ManageAdress()),
-                    );
-                  },
-                  child: Text('Ajouter une adresse'),
-                ),
-              ],
+      child:
+    
+    Container(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextFieldCard(label: 'Prénom', controller: _prenomController),
+            TextFieldCard(label: 'Nom', controller: _nomController),
+            TextFieldCard(label: 'Numéro de rue', controller: _numeroCarteController),
+            TextFieldCard(label: 'Informations', controller: _informationsController),
+            TextFieldCard(label: 'Ville', controller: _villeController),
+            TextFieldCard(label: 'Code Postal', controller: _codePostalController),
+            TextFieldCard(label: 'Département', controller: _departementController),
+            TextFieldCard(label: 'Pays', controller: _paysController),
+            TextFieldCard(label: 'Téléphone', controller: _telephoneController),
+            ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  final adresse = {
+                    'prenom': '${_prenomController.text}',
+                    'nom': '${_nomController.text}',
+                    'numeroDeRue': '${_numeroCarteController.text}',
+                    'informations': '${_informationsController.text}',
+                    'ville': '${_villeController.text}',
+                    'codePostal': '${_codePostalController.text}',
+                    'departement':'${ _departementController.text}',
+                    'pays': '${_paysController.text}',
+                    'telephone': '${_telephoneController.text}',  
+                  };
+                  addAdresseAPI(adresse);
+                  provider.addItem(Adresse.fromJson(adresse));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ManageAdress()),
+                  );
+                }
+              },
+              child: Text('Passer au paiement'),
             ),
-          ),
+          ],
         ),
       ),
+    ),
+    ),
     );
   }
 }
 
 class TextFieldCard extends StatelessWidget {
-  TextFieldCard({
-    super.key,
-    required this.controller,
-    required this.label,
-    required this.placeHolder,
-  });
-
-  final TextEditingController controller;
   final String label;
-  final String placeHolder;
+  final TextEditingController controller;
+
+  const TextFieldCard({Key? key, required this.label, required this.controller})
+      : super(key: key);
 
   @override
-  build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      decoration: InputDecoration(
-        hintText: 'Saisir votre ${this.placeHolder}',
-        label: Text.rich(
-          TextSpan(
-            children: [
-              WidgetSpan(child: Text(this.label)),
-              WidgetSpan(
-                child: Text('*', style: TextStyle(color: Colors.red)),
-              ),
-            ],
-          ),
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextFormField(
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: 'Entrez votre $label',
+          border: OutlineInputBorder(),
         ),
+        controller: controller,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Veuillez entrer votre $label';
+          }
+          return null;
+        },
       ),
     );
   }

@@ -28,75 +28,88 @@ class _UserProductsScreenState extends State<UserProductsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-      SizedBox(height: 20),
-      FutureBuilder<UserModel>(
-        future: userData,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError) {
-              return Center(child: Text("Erreur: ${snapshot.error}"));
-            }
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FutureBuilder<UserModel>(
+              future: userData,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return Center(child: Text("Erreur: ${snapshot.error}"));
+                  }
 
-            if (snapshot.hasData) {
-              return Center(
-                child: Text(
-                    "Bienvenue sur ton espace personnel, ${snapshot.data!.lastName} ${snapshot.data!.firstName}",
-                    style: TextStyle(fontSize: 16, color: Colors.black)),
-              );
-            } else {
-              return Center(child: Text("Aucune donnée disponible"));
-            }
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
+                  if (snapshot.hasData) {
+                    return Card(
+                      elevation: 2.0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          "Bienvenue sur ton espace personnel, ${snapshot.data!.lastName} ${snapshot.data!.firstName}",
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
+                  } else {
+                    return Center(child: Text("Aucune donnée disponible"));
+                  }
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              },
+            ),
+            SizedBox(height: 30),
+            Card(
+              elevation: 2.0,
+              child: ListTile(
+                leading: Icon(Icons.credit_card),
+                title: Text("Mes cartes"),
+                trailing: Icon(Icons.arrow_forward),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ManageCardsLess()),
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 10),
+            Card(
+              elevation: 2.0,
+              child: ListTile(
+                leading: Icon(Icons.location_on),
+                title: Text("Mes adresses"),
+                trailing: Icon(Icons.arrow_forward),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ManageAdress()),
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 10),
+            Card(
+              elevation: 2.0,
+              child: ListTile(
+                leading: Icon(Icons.home),
+                title: Text("Home"),
+                trailing: Icon(Icons.arrow_forward),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainApp()),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
-      Material(
-          child: Column(
-        children: [
-          SizedBox(height: 20),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ManageCardsLess()),
-              );
-            },
-            child: Text("Mes cartes",
-                style: TextStyle(
-                    color: Colors.blue,
-                    decoration: TextDecoration.underline,
-                    fontSize: 16.0)),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ManageAdress()),
-              );
-            },
-            child: Text("Mes adresses",
-                style: TextStyle(
-                    color: Colors.blue,
-                    decoration: TextDecoration.underline,
-                    fontSize: 16.0)),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MainApp()),
-              );
-            },
-            child: Text("Home",
-                style: TextStyle(
-                    color: Colors.blue,
-                    decoration: TextDecoration.underline,
-                    fontSize: 16.0)),
-          ),
-        ],
-      ))
-    ]);
+    );
   }
 }

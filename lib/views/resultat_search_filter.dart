@@ -4,6 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter_second/views/main_app.dart';
 import './../colors/colors.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_second/api/user.dart';
+import 'package:flutter_second/utils/secure_storage.dart';
+import 'package:flutter_second/views/components/auth/login_screen.dart';
 
 class FilteredResultPageScreen extends StatelessWidget {
   FilteredResultPageScreen(
@@ -92,8 +95,6 @@ class FilteredResultsPage extends StatelessWidget {
   }
 }
 
-// You will need to create a ProductDetailPage widget that takes a Produit as an argument.
-
 class ProductDetailPageScreen extends StatelessWidget {
   final produit;
 
@@ -115,13 +116,11 @@ class ProductDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var produitController =
         Provider.of<ProduitControllerTest>(context, listen: false);
-    print(
-        "identifiant unique dans mon productDetial => ${identityHashCode(produitController)}");
-    List imageUrls = produit.images
-        .map((img) => img.url)
-        .toList(); // Assurez-vous que les URLs sont bien des String
+
+    List imageUrls = produit.images.map((img) => img.url).toList();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(produit.nom),
       ),
@@ -129,11 +128,10 @@ class ProductDetailPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Carousel for product images
             CarouselSlider(
               options: CarouselOptions(
-                height: 300, // Set height of the carousel
-                autoPlay: false, // Disable autoPlay
+                height: 300,
+                autoPlay: false,
                 enlargeCenterPage: true,
                 enableInfiniteScroll: true,
                 viewportFraction: 1.0,
@@ -154,45 +152,46 @@ class ProductDetailPage extends StatelessWidget {
                     produit.nom,
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     child: Text(
                       '${produit.prix} €',
                       style: TextStyle(
-                        color: Colors.black, // Couleur du texte
-                        fontSize: 16, // Taille du texte
-                        fontWeight: FontWeight.bold, // Épaisseur du texte
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-
                   SizedBox(height: 10),
                   Text(
                     produit.description,
                     style: TextStyle(fontSize: 16, fontFamily: 'NotosansLight'),
                   ),
                   SizedBox(height: 20),
-                  // Button for adding to cart
                   ElevatedButton(
-                    onPressed: () {
-                      // Add your functionality for adding to cart here
-                      print('avant l envoi de produit');
-                      print(produit.nom);
-                      produitController.addItem(
-                          produit); // Add the product to the cart (assuming addItem is a method in ProduitController
-                      print('Added to cart');
+                    onPressed: () async {
+                      String? token = await SecureStorage().readToken();
+                      if (token == null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()),
+                        );
+                      } else {
+                        ajouterProduitPanier(produit.id, 1);
+
+                        produitController.addItem(produit);
+                      }
                     },
                     child: Text('AJOUTER AU PANIER'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorsApp.primaryColor, // Button color
+                      backgroundColor: ColorsApp.primaryColor,
                       foregroundColor: ColorsApp.textColor,
-                      // Text color
                     ).copyWith(
                       textStyle: MaterialStateProperty.all<TextStyle>(
                         TextStyle(
-                          fontFamily:
-                              'NotosansRegular', // Utilisation de la famille de polices personnalisée
+                          fontFamily: 'NotosansRegular',
                         ),
                       ),
                     ),
@@ -202,38 +201,66 @@ class ProductDetailPage extends StatelessWidget {
                     'Produits Similaires',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  // Carousel for similar products (manual control)
-                  CarouselSlider(
-                    options: CarouselOptions(
-                      height: 180,
-                      autoPlay: false, // Disable autoPlay
-                      enlargeCenterPage: true,
-                      viewportFraction: 0.8,
-                    ),
-                    items: [1, 2, 3, 4].map((i) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.symmetric(horizontal: 5.0),
-                            decoration: BoxDecoration(
-                              color: Colors.amber,
-                            ),
-                            child: Text(
-                              'Text $i',
-                              style: TextStyle(fontSize: 16.0),
-                            ),
-                          );
-                        },
-                      );
-                    }).toList(),
-                  ),
+                  ImageCarousel(imageUrls: imageUrls),
                 ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class ImageCarousel extends StatelessWidget {
+  final List imageUrls;
+
+  ImageCarousel({Key? key, required this.imageUrls}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: 180,
+        autoPlay: true,
+        enlargeCenterPage: true,
+        viewportFraction: 0.8,
+      ),
+      items: imageUrls.map((url) {
+        return Builder(
+          builder: (BuildContext context) {
+            return Container(
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.symmetric(horizontal: 5.0),
+              decoration: BoxDecoration(
+                color: Colors.amber,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  url,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Center(child: Text('Image not available'));
+                  },
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                (loadingProgress.expectedTotalBytes ?? 1)
+                            : null,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
+          },
+        );
+      }).toList(),
     );
   }
 }

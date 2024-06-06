@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
                 child: Text("Inscrivez-vous !",
                     style: TextStyle(
                         color: Colors.blue,
-                        decoration: TextDecoration.underline,
+                        decoration: TextDecoration.none,
                         fontSize: 16.0)),
               ))
             ],

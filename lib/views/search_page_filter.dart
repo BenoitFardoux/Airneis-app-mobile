@@ -11,6 +11,7 @@ class SearchPageFilter extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => sc.SearchControllerFilter(),
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text('Search Products'),
         ),

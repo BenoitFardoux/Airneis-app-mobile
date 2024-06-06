@@ -5,9 +5,10 @@ import './../../../colors/colors.dart';
 import './../../../utils/secure_storage.dart';
 import './../components/mentions/mentions.dart';
 import 'package:flutter_second/views/components/auth/login_screen.dart';
+import 'package:flutter_second/views/components/auth/register_screen.dart';
+import 'package:flutter_second/views/components/commande/commandes_widget.dart';
 import 'panier/panier_manage.dart';
 import '../search_page_filter.dart';
-
 
 class NavBar_Icons_Title extends StatelessWidget
     implements PreferredSizeWidget {
@@ -34,15 +35,21 @@ class NavBar_Icons_Title extends StatelessWidget
             );
           },
         ),
-       
-       
         IconButton(
           icon: Icon(Icons.shopping_cart),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PanierManageScreen()),
-            );
+          onPressed: () async {
+            String? token = await SecureStorage().readToken();
+            if (token == null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginScreen()),
+              );
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PanierManage()),
+              );
+            }
           },
         ),
       ],
@@ -94,7 +101,11 @@ class NavBar_Drawer extends StatelessWidget {
                     leading: Icon(Icons.shopping_bag),
                     title: const Text('Mes commandes'),
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CommandesWidget()),
+                      );
                     },
                   ),
                   ListTile(
@@ -158,6 +169,53 @@ class NavBar_Drawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => LoginScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.person_add),
+                    title: const Text('S\'inscrire'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RegisterScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.assignment),
+                    title: const Text('CGU'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TermsAndConditionsWidgetScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.gavel),
+                    title: const Text('Mentions légales'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LegalNoticeWidgetScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.contacts),
+                    title: const Text('Contact'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.description),
+                    title: const Text('A propos d\'Airneis'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AboutUsWidgetScreen()),
                       );
                     },
                   ),

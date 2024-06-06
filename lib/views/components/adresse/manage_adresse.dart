@@ -11,6 +11,7 @@ class ManageAdress extends StatelessWidget {
   Widget build(BuildContext context) {
     var providerName = Provider.of<AdresseController>(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(title: Text('Manage Adress')),
       body: Padding(
         padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
@@ -23,6 +24,13 @@ class ManageAdress extends StatelessWidget {
                   var adresseProvider = providerName.items[index];
                   return AdresseWidget(
                     adresse: adresseProvider,
+                    onDelete: () =>{
+                      providerName.removeItem(adresseProvider),
+                    } , 
+                    onEdit: () => {
+                    
+                    }
+
                   );
                 },
               ),
